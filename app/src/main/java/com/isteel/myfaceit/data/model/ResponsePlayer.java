@@ -38,6 +38,13 @@ public class ResponsePlayer {
         @SerializedName("nickname")
         String nickName;
 
+        @SerializedName("avatar")
+        String avater;
+
+        public String getAvater() {
+            return avater;
+        }
+
         public String getNickName() {
             return nickName;
         }

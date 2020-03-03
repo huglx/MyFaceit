@@ -15,8 +15,10 @@ import androidx.lifecycle.ViewModelProviders;
 import com.isteel.myfaceit.BR;
 import com.isteel.myfaceit.R;
 import com.isteel.myfaceit.ViewModelProviderFactory;
+import com.isteel.myfaceit.data.DataManager;
 import com.isteel.myfaceit.databinding.PlayerFragmentBinding;
 import com.isteel.myfaceit.ui.base.BaseFragment;
+import com.isteel.myfaceit.utils.rx.SchedulerProvider;
 
 import javax.inject.Inject;
 
@@ -25,8 +27,11 @@ public class PLayerFragment extends BaseFragment<PlayerFragmentBinding, PlayerVi
     private PlayerViewModel playerViewModel;
     private Context context;
 
-    @Inject
     ViewModelProviderFactory factory;
+    @Inject
+    DataManager dataManager;
+    @Inject
+    SchedulerProvider schedulerProvider;
 
     public static PLayerFragment newInstance() {
         Bundle args = new Bundle();
@@ -47,7 +52,8 @@ public class PLayerFragment extends BaseFragment<PlayerFragmentBinding, PlayerVi
 
     @Override
     public PlayerViewModel getViewModel() {
-        playerViewModel = ViewModelProviders.of(this,factory).get(PlayerViewModel.class);
+        factory = new ViewModelProviderFactory(dataManager,schedulerProvider);
+        playerViewModel = new ViewModelProvider(this,factory).get(PlayerViewModel.class);
         return playerViewModel;
     }
 

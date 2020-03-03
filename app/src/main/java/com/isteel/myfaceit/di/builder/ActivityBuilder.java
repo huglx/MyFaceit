@@ -17,7 +17,11 @@
 package com.isteel.myfaceit.di.builder;
 
 
+import com.isteel.myfaceit.ui.games.GameActivity;
+import com.isteel.myfaceit.ui.games.GamesFragmentProvider;
+import com.isteel.myfaceit.ui.leaderBoards.LeaderBoardsFragmentProvider;
 import com.isteel.myfaceit.ui.main.MainActivity;
+import com.isteel.myfaceit.ui.players.PlayerActivity;
 import com.isteel.myfaceit.ui.players.PlayerFragmentProvider;
 import com.isteel.myfaceit.ui.teams.TeamsFragmentProvider;
 
@@ -29,6 +33,15 @@ public abstract class ActivityBuilder {
 
     @ContributesAndroidInjector(modules ={
             PlayerFragmentProvider.class,
+            LeaderBoardsFragmentProvider.class,
+            GamesFragmentProvider.class,
             TeamsFragmentProvider.class})
     abstract MainActivity bindMainActivity();
+
+    @ContributesAndroidInjector
+    abstract GameActivity bindGameActivity();
+
+
+    @ContributesAndroidInjector
+    abstract PlayerActivity bindPlayerActivity();
 }

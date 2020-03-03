@@ -16,14 +16,14 @@ public class MainViewModel extends BaseViewModel {
 
     public MainViewModel(DataManager dataManager, SchedulerProvider schedulerProvider) {
         super(dataManager, schedulerProvider);
-        getCompositeDisposable().add(getDataManager()
+       /* getCompositeDisposable().add(getDataManager()
                 .getPlayerByNick("steel")
                 .subscribeOn(getSchedulerProvider().io())
                 .observeOn(getSchedulerProvider().ui())
                 .subscribe(PlayerResponse -> {
                     player = PlayerResponse.getItems().get(1);
                     LogUtil.log(PlayerResponse.getItems().get(2).getNickName());
-                    }));
+                    }));*/
     }
 
     @NonNull

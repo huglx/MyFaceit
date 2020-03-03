@@ -20,16 +20,24 @@ package com.isteel.myfaceit.di.module;
 import android.app.Application;
 import android.content.Context;
 
+import androidx.recyclerview.widget.LinearLayoutManager;
+
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.isteel.myfaceit.BuildConfig;
+import com.isteel.myfaceit.ViewModelProviderFactory;
 import com.isteel.myfaceit.data.AppDataManager;
 import com.isteel.myfaceit.data.DataManager;
 import com.isteel.myfaceit.data.remote.ApiHelper;
 import com.isteel.myfaceit.data.remote.ApiService;
 import com.isteel.myfaceit.di.ApiInfo;
+import com.isteel.myfaceit.ui.games.GameAdapter;
+import com.isteel.myfaceit.ui.games.GamesFragment;
+import com.isteel.myfaceit.ui.players.PlayerAdapter;
 import com.isteel.myfaceit.utils.rx.AppSchedulerProvider;
 import com.isteel.myfaceit.utils.rx.SchedulerProvider;
+
+import java.util.ArrayList;
 
 import javax.inject.Singleton;
 
@@ -57,6 +65,15 @@ public class AppModule {
     }
 
 
+
+    @Provides
+    ViewModelProviderFactory viewModelProviderFactory(DataManager dataManager,
+                                                      SchedulerProvider schedulerProvider) {
+        return new ViewModelProviderFactory(dataManager,
+                schedulerProvider);
+    }
+
+
     @Provides
     @Singleton
     Gson provideGson() {
@@ -73,6 +90,19 @@ public class AppModule {
     @Singleton
     ApiService provideApiHelper(ApiHelper appApiHelper) {
         return appApiHelper;
+    }
+    @Provides
+    GameAdapter provideGameAdapter() {
+        return new GameAdapter(new ArrayList<>());
+    }
+
+    @Provides
+    PlayerAdapter providePlayerAdapter() {
+        return new PlayerAdapter(new ArrayList<>());
+    }
+    @Provides
+    LinearLayoutManager provideLinearLayoutManager(Context context) {
+        return new LinearLayoutManager(context);
     }
 
 }

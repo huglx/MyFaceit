@@ -51,9 +51,6 @@ public abstract class BaseViewModel<N> extends ViewModel {
         this.mCompositeDisposable = new CompositeDisposable();
     }
 
-    public BaseViewModel() {
-    }
-
     @Override
     protected void onCleared() {
         mCompositeDisposable.dispose();

@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:title="1"
-        android:id="@+id/first"
-        android:icon="@drawable/abc_vector_test"/>
-    <item android:title="2"
-        android:id="@+id/second"
-        android:icon="@drawable/ic_launcher_background"/>
-    <item android:title="3"
-        android:id="@+id/bottomNavigationTimerMenuId"
-        android:icon="@drawable/ic_launcher_foreground"/>
-    <item android:title="4"
-        android:id="@+id/bottomNavigationStopWatchMenuId"
-        android:icon="@drawable/ic_launcher_foreground"/>
+    <item android:title="Games"
+        android:id="@+id/gamesFragment"
+        android:icon="@drawable/ic_gaming"/>
+    <item android:title="Top"
+        android:id="@+id/LeaderBoardsFragment"
+        android:icon="@drawable/ic_bar_chart"/>
+    <item android:title="Teams"
+        android:id="@+id/TeamsFragment"
+        android:icon="@drawable/ic_users"/>
+    <item android:title="Users"
+        android:id="@+id/PlayersFragment"
+        android:icon="@drawable/ic_user"/>
 </menu>

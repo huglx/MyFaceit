@@ -9,6 +9,4 @@ public class TeamsViewModel extends BaseViewModel {
         super(dataManager, schedulerProvider);
     }
 
-    public TeamsViewModel() {
-    }
 }

@@ -2,7 +2,7 @@ package com.isteel.myfaceit.data.remote;
 
 import android.util.Log;
 
-import com.isteel.myfaceit.data.model.BlogResponse;
+import com.isteel.myfaceit.data.model.ResponseGame;
 import com.isteel.myfaceit.data.model.ResponsePlayer;
 import com.rx2androidnetworking.Rx2AndroidNetworking;
 
@@ -26,6 +26,14 @@ public class ApiHelper implements ApiService{
                 .addQueryParameter("nickname", query)
                 .build()
                 .getObjectSingle(ResponsePlayer.class);
+    }
+
+    @Override
+    public Single<ResponseGame> getGames() {
+        return Rx2AndroidNetworking.get(ApiEndPoint.ENDPOINT_GAMES)
+                .addHeaders("Authorization","Bearer " + mApiHeader.getPublicApiHeader().getApiKey().trim())
+                .build()
+                .getObjectSingle(ResponseGame.class);
     }
 
     @Override

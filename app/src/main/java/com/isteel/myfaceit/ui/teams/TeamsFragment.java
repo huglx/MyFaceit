@@ -6,6 +6,7 @@ import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.isteel.myfaceit.BR;
@@ -43,7 +44,7 @@ public class TeamsFragment extends BaseFragment<TeamsFragmentBinding, TeamsViewM
 
     @Override
     public TeamsViewModel getViewModel() {
-        teamsViewModel = ViewModelProviders.of(this,factory).get(TeamsViewModel.class);
+        teamsViewModel = new ViewModelProvider(this,factory).get(TeamsViewModel.class);
         return teamsViewModel;
     }
 

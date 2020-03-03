@@ -34,7 +34,6 @@ import androidx.databinding.ViewDataBinding;
 import com.isteel.myfaceit.utils.NetworkUtils;
 
 import dagger.android.AndroidInjection;
-import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 /**
  * Created by amitshekhar on 07/07/17.
@@ -79,11 +78,6 @@ public abstract class BaseActivity<T extends ViewDataBinding, V extends BaseView
     @Override
     public void onFragmentDetached(String tag) {
 
-    }
-
-    @Override
-    protected void attachBaseContext(Context newBase) {
-        super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
     }
 
     @Override

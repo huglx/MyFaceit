@@ -2,7 +2,7 @@ package com.isteel.myfaceit.data;
 
 import android.content.Context;
 
-import com.isteel.myfaceit.data.model.BlogResponse;
+import com.isteel.myfaceit.data.model.ResponseGame;
 import com.isteel.myfaceit.data.model.ResponsePlayer;
 import com.isteel.myfaceit.data.remote.ApiHeader;
 import com.isteel.myfaceit.data.remote.ApiHelper;
@@ -25,6 +25,11 @@ public class AppDataManager implements DataManager{
     @Override
     public Single<ResponsePlayer> getPlayerByNick(String query) {
         return mApiHelper.getPlayerByNick(query);
+    }
+
+    @Override
+    public Single<ResponseGame> getGames() {
+        return mApiHelper.getGames();
     }
 
     @Override
