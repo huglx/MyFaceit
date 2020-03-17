@@ -28,11 +28,14 @@ import com.isteel.myfaceit.BuildConfig;
 import com.isteel.myfaceit.ViewModelProviderFactory;
 import com.isteel.myfaceit.data.AppDataManager;
 import com.isteel.myfaceit.data.DataManager;
+import com.isteel.myfaceit.data.local.prefs.AppPreferencesHelper;
+import com.isteel.myfaceit.data.local.prefs.PreferencesHelper;
 import com.isteel.myfaceit.data.remote.ApiHelper;
 import com.isteel.myfaceit.data.remote.ApiService;
 import com.isteel.myfaceit.di.ApiInfo;
-import com.isteel.myfaceit.ui.games.GameAdapter;
-import com.isteel.myfaceit.ui.games.GamesFragment;
+import com.isteel.myfaceit.di.PreferenceInfo;
+import com.isteel.myfaceit.ui.favourites.FavouritesAdapter;
+import com.isteel.myfaceit.ui.leaderBoards.LeaderAdapter;
 import com.isteel.myfaceit.ui.players.PlayerAdapter;
 import com.isteel.myfaceit.utils.rx.AppSchedulerProvider;
 import com.isteel.myfaceit.utils.rx.SchedulerProvider;
@@ -87,19 +90,38 @@ public class AppModule {
     }
 
     @Provides
+    @PreferenceInfo
+    String providePreferenceName() {
+        return "pref";
+    }
+
+    @Provides
+    @Singleton
+    PreferencesHelper providePreferencesHelper(AppPreferencesHelper appPreferencesHelper) {
+        return appPreferencesHelper;
+    }
+
+    @Provides
     @Singleton
     ApiService provideApiHelper(ApiHelper appApiHelper) {
         return appApiHelper;
     }
     @Provides
-    GameAdapter provideGameAdapter() {
-        return new GameAdapter(new ArrayList<>());
+    FavouritesAdapter provideGameAdapter() {
+        return new FavouritesAdapter(new ArrayList<>());
     }
 
     @Provides
     PlayerAdapter providePlayerAdapter() {
         return new PlayerAdapter(new ArrayList<>());
     }
+
+
+    @Provides
+    LeaderAdapter provideLeaderAdapter() {
+        return new LeaderAdapter(new ArrayList<>());
+    }
+
     @Provides
     LinearLayoutManager provideLinearLayoutManager(Context context) {
         return new LinearLayoutManager(context);

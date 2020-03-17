@@ -1,6 +1,4 @@
-package com.isteel.myfaceit.ui.games;
-
-import android.util.Log;
+package com.isteel.myfaceit.ui.favourites;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
@@ -13,10 +11,10 @@ import com.isteel.myfaceit.utils.rx.SchedulerProvider;
 
 import java.util.List;
 
-public class GamesViewModel extends BaseViewModel<GameNavigator> {
+public class FavouritesViewModel extends BaseViewModel<FavouritesNavigator> {
     private MutableLiveData<List<ResponseGame.Game>> gameListLiveData;
 
-    public GamesViewModel(DataManager dataManager, SchedulerProvider schedulerProvider) {
+    public FavouritesViewModel(DataManager dataManager, SchedulerProvider schedulerProvider) {
         super(dataManager, schedulerProvider);
 
         gameListLiveData = new MutableLiveData<>();
@@ -36,7 +34,6 @@ public class GamesViewModel extends BaseViewModel<GameNavigator> {
                     if (responseGame != null && responseGame.getItems() != null) {
                         LogUtil.log(responseGame.getItems().get(0).getLabel()+"1234");
                         gameListLiveData.setValue(responseGame.getItems());
-                        getNavigator().updateBlog(gameListLiveData.getValue());
                         LogUtil.log(gameListLiveData.getValue().size()+"AAAA");
                         setIsLoading(false);
 

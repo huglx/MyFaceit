@@ -1,15 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:title="Games"
+    <item android:title=""
         android:id="@+id/gamesFragment"
-        android:icon="@drawable/ic_gaming"/>
-    <item android:title="Top"
+        android:icon="@drawable/ic_bookmark"/>
+    <item android:title=""
         android:id="@+id/LeaderBoardsFragment"
         android:icon="@drawable/ic_bar_chart"/>
-    <item android:title="Teams"
-        android:id="@+id/TeamsFragment"
-        android:icon="@drawable/ic_users"/>
-    <item android:title="Users"
+    <item android:title=""
         android:id="@+id/PlayersFragment"
         android:icon="@drawable/ic_user"/>
 </menu>

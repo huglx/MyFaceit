@@ -19,11 +19,13 @@ public class ApiHelper implements ApiService{
     }
 
     @Override
-    public Single<ResponsePlayer> getPlayerByNick(String query) {
+    public Single<ResponsePlayer> getPlayerByNick(String query, String game) {
         Log.d("PLEASE", mApiHeader.getPublicApiHeader().getApiKey());
         return Rx2AndroidNetworking.get(ApiEndPoint.ENDPOINT_PLAYERS)
                 .addHeaders("Authorization","Bearer " + mApiHeader.getPublicApiHeader().getApiKey().trim())
                 .addQueryParameter("nickname", query)
+                .addQueryParameter("limit", "50")
+                .addQueryParameter("game", game)
                 .build()
                 .getObjectSingle(ResponsePlayer.class);
     }
@@ -34,6 +36,16 @@ public class ApiHelper implements ApiService{
                 .addHeaders("Authorization","Bearer " + mApiHeader.getPublicApiHeader().getApiKey().trim())
                 .build()
                 .getObjectSingle(ResponseGame.class);
+    }
+
+    @Override
+    public Single<ResponsePlayer> getTop(String game, String region) {
+        return Rx2AndroidNetworking.get(ApiEndPoint.ENDPOINT_TOP)
+                .addHeaders("Authorization","Bearer " + mApiHeader.getPublicApiHeader().getApiKey().trim())
+                .addPathParameter("game_id",game)
+                .addPathParameter("region",region)
+                .build()
+                .getObjectSingle(ResponsePlayer.class);
     }
 
     @Override

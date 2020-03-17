@@ -6,7 +6,7 @@
 
         <variable
             name="viewModel"
-            type="com.isteel.myfaceit.ui.favourites.FavouritesItemViewModel" />
+            type="com.isteel.myfaceit.ui.leaderBoards.LeaderItemViewModel" />
 
     </data>
 
@@ -28,7 +28,7 @@
             <TextView
                 android:layout_marginLeft="8dp"
                 android:id="@+id/label"
-                android:text="@{viewModel.label}"
+                android:text="@{viewModel.nickname}"
                 android:textAppearance="@style/Head5TextStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

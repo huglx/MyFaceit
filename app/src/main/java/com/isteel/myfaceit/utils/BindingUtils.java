@@ -24,9 +24,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
+import com.isteel.myfaceit.R;
 import com.isteel.myfaceit.data.model.ResponseGame;
 import com.isteel.myfaceit.data.model.ResponsePlayer;
-import com.isteel.myfaceit.ui.games.GameAdapter;
+import com.isteel.myfaceit.ui.favourites.FavouritesAdapter;
+import com.isteel.myfaceit.ui.leaderBoards.LeaderAdapter;
 import com.isteel.myfaceit.ui.players.PlayerAdapter;
 
 import java.util.List;
@@ -43,7 +45,7 @@ public final class BindingUtils {
 
     @BindingAdapter({"adapter"})
     public static void addGameItems(RecyclerView recyclerView, List<ResponseGame.Game> blogs) {
-        GameAdapter adapter = (GameAdapter) recyclerView.getAdapter();
+        FavouritesAdapter adapter = (FavouritesAdapter) recyclerView.getAdapter();
 
         if (adapter != null) {
             adapter.clearItems();
@@ -51,20 +53,37 @@ public final class BindingUtils {
         }
     }
 
-    @BindingAdapter({"adapter"})
+    @BindingAdapter({"android:players"})
     public static void addPlayerItems(RecyclerView recyclerView, List<ResponsePlayer.Player> players) {
         PlayerAdapter adapter = (PlayerAdapter) recyclerView.getAdapter();
-
         if (adapter != null) {
             adapter.clearItems();
             adapter.addItems(players);
+            recyclerView.scheduleLayoutAnimation();
+
+        }
+    }
+
+    @BindingAdapter({"android:leaders"})
+    public static void addLeaders(RecyclerView recyclerView, List<ResponsePlayer.Player> players) {
+        LeaderAdapter adapter = (LeaderAdapter) recyclerView.getAdapter();
+        if (adapter != null) {
+            adapter.clearItems();
+            adapter.addItems(players);
+            recyclerView.scheduleLayoutAnimation();
+
         }
     }
 
     @BindingAdapter("imageUrl")
     public static void setImageUrl(ImageView imageView, String url) {
         Context context = imageView.getContext();
-        Glide.with(context).load(url).apply(RequestOptions.circleCropTransform()).into(imageView);
+        if( !(url.isEmpty()) ) {
+            Glide.with(context).load(url).apply(RequestOptions.circleCropTransform()).into(imageView);
+        }else{
+            Glide.with(context).load(R.drawable.ic_launcher_foreground).apply(RequestOptions.circleCropTransform()).into(imageView);
+
+        }
     }
 
 }

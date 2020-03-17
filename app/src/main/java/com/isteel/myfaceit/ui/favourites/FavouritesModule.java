@@ -1,4 +1,4 @@
-package com.isteel.myfaceit.ui.players;
+package com.isteel.myfaceit.ui.favourites;
 
 import android.content.Context;
 
@@ -10,12 +10,12 @@ import dagger.Module;
 import dagger.Provides;
 
 @Module
-public class PlayerModule {
-    /*@Provides
-    PlayerAdapter providePlayerAdapter() {
-        return new PlayerAdapter(new ArrayList<>());
+public class FavouritesModule {
+    @Provides
+    FavouritesAdapter provideGameAdapter() {
+        return new FavouritesAdapter(new ArrayList<>());
     }
-*/
+
     @Provides
     LinearLayoutManager provideLinearLayoutManager(Context context) {
         return new LinearLayoutManager(context);

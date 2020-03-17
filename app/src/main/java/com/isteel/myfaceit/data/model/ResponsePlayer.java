@@ -38,11 +38,20 @@ public class ResponsePlayer {
         @SerializedName("nickname")
         String nickName;
 
+        @Expose
+        @SerializedName("games")
+        List<ResponseGame.Game> games;
+
         @SerializedName("avatar")
         String avater;
 
         public String getAvater() {
             return avater;
+        }
+
+
+        public List<ResponseGame.Game> getGames() {
+            return games;
         }
 
         public String getNickName() {

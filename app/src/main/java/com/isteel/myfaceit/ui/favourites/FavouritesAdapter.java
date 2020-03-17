@@ -1,4 +1,4 @@
-package com.isteel.myfaceit.ui.games;
+package com.isteel.myfaceit.ui.favourites;
 
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
@@ -13,13 +13,13 @@ import com.isteel.myfaceit.utils.LogUtil;
 
 import java.util.List;
 
-public class GameAdapter extends RecyclerView.Adapter<GameAdapter.GameViewHolder> {
+public class FavouritesAdapter extends RecyclerView.Adapter<FavouritesAdapter.GameViewHolder> {
 
     private List<ResponseGame.Game> mGameResponseList;
 
     public GameAdapterListener mListener;
 
-    public GameAdapter(List<ResponseGame.Game> mGameResponseList) {
+    public FavouritesAdapter(List<ResponseGame.Game> mGameResponseList) {
         this.mGameResponseList = mGameResponseList;
 
     }
@@ -64,10 +64,10 @@ public class GameAdapter extends RecyclerView.Adapter<GameAdapter.GameViewHolder
         void onRetryClick();
     }
 
-    public class GameViewHolder extends BaseViewHolder implements GameItemViewModel.GameItemViewModelListener{
+    public class GameViewHolder extends BaseViewHolder implements FavouritesItemViewModel.GameItemViewModelListener{
 
         private GameItemBinding mBinding;
-        private GameItemViewModel viewModel;
+        private FavouritesItemViewModel viewModel;
 
         public GameViewHolder(GameItemBinding binding) {
             super(binding.getRoot());
@@ -77,7 +77,7 @@ public class GameAdapter extends RecyclerView.Adapter<GameAdapter.GameViewHolder
         @Override
         public void onBind(int position) {
             final ResponseGame.Game game = mGameResponseList.get(position);
-            viewModel = new GameItemViewModel(this, game);
+            viewModel = new FavouritesItemViewModel(this, game);
             mBinding.setViewModel(viewModel);
 
             // Immediate Binding

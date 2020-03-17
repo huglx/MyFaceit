@@ -1,29 +1,23 @@
-package com.isteel.myfaceit.ui.games;
+package com.isteel.myfaceit.ui.favourites;
 
-import android.content.Context;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.isteel.myfaceit.BR;
 import com.isteel.myfaceit.R;
 import com.isteel.myfaceit.ViewModelProviderFactory;
-import com.isteel.myfaceit.data.DataManager;
 import com.isteel.myfaceit.data.model.ResponseGame;
 import com.isteel.myfaceit.databinding.GamesFragmentBinding;
 import com.isteel.myfaceit.ui.base.BaseFragment;
-import com.isteel.myfaceit.utils.rx.SchedulerProvider;
 
 import java.util.List;
 
@@ -33,18 +27,18 @@ import dagger.android.AndroidInjector;
 import dagger.android.DispatchingAndroidInjector;
 import dagger.android.support.HasSupportFragmentInjector;
 
-public class GamesFragment extends BaseFragment<GamesFragmentBinding, GamesViewModel> implements
-            GameAdapter.GameAdapterListener, GameNavigator, HasSupportFragmentInjector {
+public class GamesFragment extends BaseFragment<GamesFragmentBinding, FavouritesViewModel> implements
+            FavouritesAdapter.GameAdapterListener, FavouritesNavigator, HasSupportFragmentInjector {
 
     DispatchingAndroidInjector<Fragment> fragmentDispatchingAndroidInjector;
 
     GamesFragmentBinding gamesFragmentBinding;
-    private GamesViewModel gamesViewModel;
+    private FavouritesViewModel favouritesViewModel;
 
     @Inject
     ViewModelProviderFactory factory;
     @Inject
-    GameAdapter mGameAdapter;
+    FavouritesAdapter mGameAdapter;
 
     LinearLayoutManager mLinearLayout = new LinearLayoutManager(getContext());
 
@@ -70,17 +64,17 @@ public class GamesFragment extends BaseFragment<GamesFragmentBinding, GamesViewM
     }
 
     @Override
-    public GamesViewModel getViewModel() {
+    public FavouritesViewModel getViewModel() {
        // factory = new ViewModelProviderFactory(dataManager, schedulerProvider);
-        gamesViewModel = new ViewModelProvider(this,factory).get(GamesViewModel.class);
-        return gamesViewModel;
+        favouritesViewModel = new ViewModelProvider(this,factory).get(FavouritesViewModel.class);
+        return favouritesViewModel;
     }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
-        gamesViewModel.setNavigator(this);
+        favouritesViewModel.setNavigator(this);
 
     }
 
@@ -107,7 +101,7 @@ public class GamesFragment extends BaseFragment<GamesFragmentBinding, GamesViewM
 
     @Override
     public void onRetryClick() {
-        gamesViewModel.fetchData();
+        favouritesViewModel.fetchData();
     }
 
     @Override

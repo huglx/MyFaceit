@@ -5,7 +5,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 
 import com.isteel.myfaceit.data.DataManager;
-import com.isteel.myfaceit.ui.games.GamesViewModel;
+import com.isteel.myfaceit.ui.favourites.FavouritesViewModel;
 import com.isteel.myfaceit.ui.leaderBoards.LeaderBoardsViewModel;
 import com.isteel.myfaceit.ui.main.MainViewModel;
 import com.isteel.myfaceit.ui.players.PlayerViewModel;
@@ -34,9 +34,9 @@ public class ViewModelProviderFactory extends ViewModelProvider.NewInstanceFacto
     if (modelClass.isAssignableFrom(MainViewModel.class)) {
       //noinspection unchecked
       return (T) new MainViewModel(dataManager, schedulerProvider);
-    }else if (modelClass.isAssignableFrom(GamesViewModel.class)) {
+    }else if (modelClass.isAssignableFrom(FavouritesViewModel.class)) {
       //noinspection unchecked
-      return (T) new GamesViewModel(dataManager, schedulerProvider);
+      return (T) new FavouritesViewModel(dataManager, schedulerProvider);
     }else if (modelClass.isAssignableFrom(PlayerViewModel.class)) {
       //noinspection unchecked
       return (T) new PlayerViewModel(dataManager, schedulerProvider);

@@ -1,8 +1,6 @@
-package com.isteel.myfaceit.ui.games;
+package com.isteel.myfaceit.ui.favourites;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
@@ -18,35 +16,27 @@ import com.isteel.myfaceit.R;
 import com.isteel.myfaceit.ViewModelProviderFactory;
 import com.isteel.myfaceit.data.model.ResponseGame;
 import com.isteel.myfaceit.databinding.ActivityGameBinding;
-import com.isteel.myfaceit.databinding.ActivityMainBinding;
+import com.isteel.myfaceit.databinding.ActivityPlayerBinding;
 import com.isteel.myfaceit.ui.base.BaseActivity;
-import com.isteel.myfaceit.ui.leaderBoards.LeaderBoardsFragment;
-import com.isteel.myfaceit.ui.main.MainViewModel;
-import com.isteel.myfaceit.ui.players.PLayerFragment;
+import com.isteel.myfaceit.ui.leaderBoards.LeaderActivity;
 import com.isteel.myfaceit.ui.players.PlayerActivity;
-import com.isteel.myfaceit.ui.teams.TeamsFragment;
 import com.isteel.myfaceit.utils.BottomNavigationViewHelper;
 import com.isteel.myfaceit.utils.LogUtil;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
 
-import dagger.android.AndroidInjector;
-import dagger.android.DispatchingAndroidInjector;
-import dagger.android.support.HasSupportFragmentInjector;
-
-public class GameActivity extends BaseActivity<ActivityGameBinding, GamesViewModel> implements
-GameAdapter.GameAdapterListener, GameNavigator{
+public class FavouritesActivity extends BaseActivity<ActivityGameBinding, FavouritesViewModel> implements
+FavouritesAdapter.GameAdapterListener, FavouritesNavigator {
 
     private ActivityGameBinding mainBinding;
 
     @Inject
     ViewModelProviderFactory factory;
-    private GamesViewModel mainViewModel;
+    private FavouritesViewModel mainViewModel;
     @Inject
-    GameAdapter mGameAdapter;
+    FavouritesAdapter mGameAdapter;
     @Inject
     LinearLayoutManager mLinearLayout;
 
@@ -61,12 +51,12 @@ GameAdapter.GameAdapterListener, GameNavigator{
     }
 
     public static Intent newIntent(Context context) {
-        return new Intent(context, GameActivity.class);
+        return new Intent(context, FavouritesActivity.class);
     }
 
     @Override
-    public GamesViewModel getViewModel() {
-        mainViewModel = new ViewModelProvider(this,factory).get(GamesViewModel.class);
+    public FavouritesViewModel getViewModel() {
+        mainViewModel = new ViewModelProvider(this,factory).get(FavouritesViewModel.class);
         return mainViewModel;
     }
 
@@ -118,20 +108,10 @@ GameAdapter.GameAdapterListener, GameNavigator{
                         startActivity(PlayerActivity.newIntent(this));
                         overridePendingTransition(0, 0);
                         this.finish();
-
-
-                        break;
-                    case R.id.TeamsFragment:
-                        //   fragment = TeamsFragment.newInstance();
-                        startActivity(GameActivity.newIntent(this));
-                        overridePendingTransition(0, 0);
-                        this.finish();
-
-
                         break;
                     case R.id.gamesFragment:
                         //    fragment = GamesFragment.newInstance();
-                        startActivity(GameActivity.newIntent(this));
+                        startActivity(FavouritesActivity.newIntent(this));
                         overridePendingTransition(0, 0);
                         this.finish();
 
@@ -139,7 +119,7 @@ GameAdapter.GameAdapterListener, GameNavigator{
                         break;
                     case R.id.LeaderBoardsFragment:
                         //   fragment = LeaderBoardsFragment.newInstance();
-                        startActivity(GameActivity.newIntent(this));
+                        startActivity(LeaderActivity.newIntent(this));
                         overridePendingTransition(0, 0);
 
                         break;

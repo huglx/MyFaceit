@@ -1,29 +1,19 @@
 package com.isteel.myfaceit.ui.main;
 
-import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.lifecycle.ViewModelProviders;
 
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.isteel.myfaceit.BR;
 import com.isteel.myfaceit.R;
 import com.isteel.myfaceit.ViewModelProviderFactory;
-import com.isteel.myfaceit.data.model.ResponsePlayer;
 import com.isteel.myfaceit.databinding.ActivityMainBinding;
 import com.isteel.myfaceit.ui.base.BaseActivity;
-import com.isteel.myfaceit.ui.games.GameActivity;
-import com.isteel.myfaceit.ui.games.GamesFragment;
-import com.isteel.myfaceit.ui.games.GamesViewModel;
-import com.isteel.myfaceit.ui.leaderBoards.LeaderBoardsFragment;
-import com.isteel.myfaceit.ui.players.PLayerFragment;
+import com.isteel.myfaceit.ui.favourites.FavouritesActivity;
 import com.isteel.myfaceit.ui.players.PlayerActivity;
-import com.isteel.myfaceit.ui.players.PlayerViewModel;
-import com.isteel.myfaceit.ui.teams.TeamsFragment;
 import com.isteel.myfaceit.utils.BottomNavigationViewHelper;
 
 import javax.inject.Inject;
@@ -62,7 +52,7 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, MainViewMode
         super.onCreate(savedInstanceState);
         mainBinding = getViewDataBinding();
         setUp();
-         startActivity(GameActivity.newIntent(this));
+         startActivity(FavouritesActivity.newIntent(this));
        // loadFragment(GamesFragment.newInstance());
     }
 
@@ -99,23 +89,16 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, MainViewMode
                     this.finish();
 
                     break;
-                case R.id.TeamsFragment:
-                 //   fragment = TeamsFragment.newInstance();
-                   startActivity(GameActivity.newIntent(this));
-                    MainActivity.this.overridePendingTransition(0, 0);
-                    this.finish();
-
-                    break;
                 case R.id.gamesFragment:
                 //    fragment = GamesFragment.newInstance();
-                    startActivity(GameActivity.newIntent(this));
+                    startActivity(FavouritesActivity.newIntent(this));
                     MainActivity.this.overridePendingTransition(0, 0);
                     this.finish();
 
                     break;
                 case R.id.LeaderBoardsFragment:
                  //   fragment = LeaderBoardsFragment.newInstance();
-                    startActivity(GameActivity.newIntent(this));
+                    startActivity(FavouritesActivity.newIntent(this));
                     MainActivity.this.overridePendingTransition(0, 0);
                     this.finish();
 

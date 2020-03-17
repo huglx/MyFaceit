@@ -22,8 +22,22 @@ public class ResponseGame {
         @SerializedName("game_id")
         String id;
 
+        @SerializedName("name")
+        String gameName;
+
+        @SerializedName("skill_level")
+        String lvl;
+
         @SerializedName("long_label")
         String label;
+
+        public String getGameName() {
+            return gameName;
+        }
+
+        public String getLvl() {
+            return lvl;
+        }
 
         public String getLabel() {
             return label;

@@ -10,7 +10,7 @@
 
         <variable
             name="viewModel"
-            type="com.isteel.myfaceit.ui.games.GamesViewModel" />
+            type="com.isteel.myfaceit.ui.favourites.FavouritesViewModel" />
 
     </data>
     <androidx.coordinatorlayout.widget.CoordinatorLayout

@@ -14,15 +14,16 @@
  *  limitations under the License
  */
 
-package com.isteel.myfaceit.ui.games;
+package com.isteel.myfaceit.ui.leaderBoards;
 
 import com.isteel.myfaceit.data.model.ResponseGame;
+import com.isteel.myfaceit.data.model.ResponsePlayer;
 
 import java.util.List;
 
-public interface GameNavigator {
+public interface LeaderNavigator {
 
     void handleError(Throwable throwable);
 
-    void updateBlog(List<ResponseGame.Game> gameList);
+    void updateList(List<ResponsePlayer.Player> playerList);
 }

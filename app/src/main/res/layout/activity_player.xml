@@ -27,11 +27,13 @@
                 android:layout_height="match_parent">
 
             <androidx.recyclerview.widget.RecyclerView
+                android:layoutAnimation="@anim/layout_anim"
+                app:layout_behavior="@string/appbar_scrolling_view_behavior"
                 android:visibility="@{viewModel.isLoading ? View.GONE : View.VISIBLE}"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:id="@+id/recyclerView"
-                app:adapter="@{viewModel.playerListLiveData}"
+                android:players="@{viewModel.playerListLiveData}"
                 tools:listitem="@layout/player_item"
                 />
 
@@ -55,7 +57,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="55dp"
                 android:layout_below="@+id/toolbar"
-                android:background="@color/colorPrimary"
+                android:background="@color/colorAccentDarker"
                 >
                 <EditText
                     android:imeOptions="actionDone"
@@ -64,7 +66,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="55dp"
                     android:gravity="left|center"
-                    android:hint="Type some text..."
+                    android:hint="Type nickname..."
                     android:padding="10dp"
                     android:textColorHint="@color/colorGray"
                     android:autofillHints="AAA" />
@@ -72,6 +74,7 @@
         </com.google.android.material.appbar.AppBarLayout>
         <androidx.core.widget.ContentLoadingProgressBar
             android:id="@+id/address_looking_up"
+            android:indeterminateDrawable="@drawable/progress_bar"
             android:theme="@style/ContentLoadingProgress"
             style="?android:attr/progressBarStyleLarge"
             android:layout_width="wrap_content"

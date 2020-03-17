@@ -1,5 +1,6 @@
 package com.isteel.myfaceit.ui.players;
 
+import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import com.isteel.myfaceit.data.DataManager;
@@ -17,25 +18,19 @@ public class PlayerViewModel extends BaseViewModel<PlayerNavigator> {
     public PlayerViewModel(DataManager dataManager, SchedulerProvider schedulerProvider) {
         super(dataManager, schedulerProvider);
         playerListLiveData = new MutableLiveData<>();
-        fetchData("");
+        fetchData("skyline4132");
     }
 
     public void fetchData(String querry) {
         setIsLoading(true);
-
-        LogUtil.log("dfdf");
         getCompositeDisposable().add(getDataManager()
-                .getPlayerByNick(querry)
+                .getPlayerByNick(querry, getDataManager().getGame())
                 .subscribeOn(getSchedulerProvider().io())
                 .observeOn(getSchedulerProvider().ui())
                 .subscribe(responsePlayer -> {
                     if (responsePlayer != null && responsePlayer.getItems() != null) {
                         playerListLiveData.setValue(responsePlayer.getItems());
-
-                        getNavigator().updatePlayer(playerListLiveData.getValue());
-                        setIsLoading(false);
-
-                    }
+                    }setIsLoading(false);
                 }, throwable -> {
                     LogUtil.log(throwable.getMessage());
                     setIsLoading(false);
@@ -43,7 +38,7 @@ public class PlayerViewModel extends BaseViewModel<PlayerNavigator> {
                 }));
     }
 
-    public MutableLiveData<List<ResponsePlayer.Player>> getPlayerListLiveData() {
+    public LiveData<List<ResponsePlayer.Player>> getPlayerListLiveData() {
         return playerListLiveData;
     }
 }

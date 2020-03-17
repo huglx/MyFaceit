@@ -11,4 +11,7 @@ public final class ApiEndPoint {
 
     public static final String ENDPOINT_GAMES = BASE_URL + "/games";
 
+    public static final String ENDPOINT_TOP = BASE_URL + "/rankings/games/{game_id}/regions/{region}";
+
+
 }

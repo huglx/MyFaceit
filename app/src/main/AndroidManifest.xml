@@ -13,14 +13,17 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:targetApi="m">
-        <activity android:name=".ui.players.PlayerActivity">
+        <activity android:name=".ui.players.PlayerActivity"
+            android:windowSoftInputMode="adjustPan">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.games.GameActivity" />
+        <activity android:name=".ui.favourites.FavouritesActivity" />
+        <activity android:name=".ui.leaderBoards.LeaderActivity" />
+
         <activity android:name=".ui.main.MainActivity">
 
         </activity>

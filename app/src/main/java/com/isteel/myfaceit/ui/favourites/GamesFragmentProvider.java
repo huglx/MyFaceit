@@ -1,4 +1,4 @@
-package com.isteel.myfaceit.ui.games;
+package com.isteel.myfaceit.ui.favourites;
 
 import dagger.Module;
 import dagger.android.ContributesAndroidInjector;

@@ -1,19 +1,15 @@
-package com.isteel.myfaceit.ui.players;
+package com.isteel.myfaceit.ui.leaderBoards;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.view.inputmethod.EditorInfo;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
@@ -21,10 +17,12 @@ import com.isteel.myfaceit.BR;
 import com.isteel.myfaceit.R;
 import com.isteel.myfaceit.ViewModelProviderFactory;
 import com.isteel.myfaceit.data.model.ResponsePlayer;
+import com.isteel.myfaceit.databinding.ActivityLeaderBinding;
 import com.isteel.myfaceit.databinding.ActivityPlayerBinding;
 import com.isteel.myfaceit.ui.base.BaseActivity;
 import com.isteel.myfaceit.ui.favourites.FavouritesActivity;
-import com.isteel.myfaceit.ui.leaderBoards.LeaderActivity;
+import com.isteel.myfaceit.ui.players.PlayerActivity;
+import com.isteel.myfaceit.ui.players.PlayerNavigator;
 import com.isteel.myfaceit.utils.BottomNavigationViewHelper;
 import com.isteel.myfaceit.utils.LogUtil;
 
@@ -32,20 +30,20 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-public class PlayerActivity extends BaseActivity<ActivityPlayerBinding, PlayerViewModel>
-        implements PlayerNavigator,PlayerAdapter.GameAdapterListener{
+public class LeaderActivity extends BaseActivity<ActivityLeaderBinding, LeaderBoardsViewModel>
+        implements LeaderNavigator{
 
-    private ActivityPlayerBinding mainBinding;
+    private ActivityLeaderBinding mainBinding;
 
     @Inject
     ViewModelProviderFactory factory;
 
     @Inject
-    PlayerAdapter mPlayerAdapter;
+    LeaderAdapter mLeaderAdapter;
     @Inject
     LinearLayoutManager mLinearLayout;
 
-    private PlayerViewModel playerViewModel;
+    private LeaderBoardsViewModel leaderBoardsViewModel;
 
 
     @Override
@@ -55,45 +53,45 @@ public class PlayerActivity extends BaseActivity<ActivityPlayerBinding, PlayerVi
 
     @Override
     public int getLayoutId() {
-        return R.layout.activity_player;
+        return R.layout.activity_leader;
     }
 
     public static Intent newIntent(Context context) {
-        return new Intent(context, PlayerActivity.class);
+        return new Intent(context, LeaderActivity.class);
     }
 
     @Override
-    public PlayerViewModel getViewModel() {
-        playerViewModel = new ViewModelProvider(this,factory).get(PlayerViewModel.class);
-        return playerViewModel;
+    public LeaderBoardsViewModel getViewModel() {
+        leaderBoardsViewModel = new ViewModelProvider(this,factory).get(LeaderBoardsViewModel.class);
+        return leaderBoardsViewModel;
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mainBinding = getViewDataBinding();
-        mainBinding.recyclerView.setLayoutManager(mLinearLayout);
-        mainBinding.recyclerView.setAdapter(mPlayerAdapter);
+        LogUtil.log("dfdf");
         setUp();
-        playerViewModel.setNavigator(this);
-        mPlayerAdapter.setListener(this);
+        leaderBoardsViewModel.setNavigator(this);
 
-        Toast.makeText(this, "231321", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "111111111", Toast.LENGTH_SHORT).show();
+        mainBinding.recyclerView.setLayoutManager(mLinearLayout);
+        mainBinding.recyclerView.setAdapter(mLeaderAdapter);
     }
 
     private void setUp() {
         setSupportActionBar(mainBinding.toolbar);
         if (getSupportActionBar() != null) {
-            mainBinding.toolbar.setTitle("Games");
+            mainBinding.toolbar.setTitle("Top");
         }
         BottomNavigationViewHelper.disableShiftMode(mainBinding.bottomNavigation);
         Menu menu = mainBinding.bottomNavigation.getMenu();
-        MenuItem menuItem = menu.getItem(2);
+        MenuItem menuItem = menu.getItem(1);
         menuItem.setChecked(true);
 
         mainBinding.search.setOnEditorActionListener((v, actionId, event) -> {
             if ((event != null && (event.getKeyCode() == KeyEvent.KEYCODE_ENTER)) || (actionId == EditorInfo.IME_ACTION_DONE)) {
-                playerViewModel.fetchData(mainBinding.search.getText().toString());
+                leaderBoardsViewModel.fetchData("csgo", "EU");
 
             }
             return false;
@@ -140,9 +138,9 @@ public class PlayerActivity extends BaseActivity<ActivityPlayerBinding, PlayerVi
     }
 
     @Override
-    public void updatePlayer(List<ResponsePlayer.Player> gameList) {
-        mPlayerAdapter.clearItems();
-        mPlayerAdapter.addItems(gameList);
+    public void updateList(List<ResponsePlayer.Player> playerList) {
+        mLeaderAdapter.clearItems();
+        mLeaderAdapter.addItems(playerList);
     }
 
     @Override
@@ -159,10 +157,5 @@ public class PlayerActivity extends BaseActivity<ActivityPlayerBinding, PlayerVi
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         return super.onOptionsItemSelected(item);
-    }
-
-    @Override
-    public void onRetryClick() {
-
     }
 }

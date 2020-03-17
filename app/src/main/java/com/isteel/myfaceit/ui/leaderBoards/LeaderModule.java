@@ -1,4 +1,4 @@
-package com.isteel.myfaceit.ui.games;
+package com.isteel.myfaceit.ui.leaderBoards;
 
 import android.content.Context;
 
@@ -10,10 +10,10 @@ import dagger.Module;
 import dagger.Provides;
 
 @Module
-public class GamesModule {
+public class LeaderModule {
     @Provides
-    GameAdapter provideGameAdapter() {
-        return new GameAdapter(new ArrayList<>());
+    LeaderAdapter provideLeaderAdapter() {
+        return new LeaderAdapter(new ArrayList<>());
     }
 
     @Provides
