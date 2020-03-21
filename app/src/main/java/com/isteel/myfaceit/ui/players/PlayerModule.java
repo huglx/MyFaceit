@@ -20,4 +20,6 @@ public class PlayerModule {
     LinearLayoutManager provideLinearLayoutManager(Context context) {
         return new LinearLayoutManager(context);
     }
+
+
 }
