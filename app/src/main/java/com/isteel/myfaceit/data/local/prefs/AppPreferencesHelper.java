@@ -37,7 +37,7 @@ public class AppPreferencesHelper implements PreferencesHelper {
 
     @Override
     public String getGame() {
-        return mPrefs.getString(PREF_GAME, null);
+        return mPrefs.getString(PREF_GAME, "csgo");
     }
 
     @Override

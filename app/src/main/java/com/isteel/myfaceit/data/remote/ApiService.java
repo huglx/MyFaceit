@@ -10,8 +10,9 @@ public interface ApiService {
 
     Single<ResponseGame> getGames();
 
-    Single<ResponsePlayer> getTop(String game, String region);
+    Single<ResponsePlayer.Player> getPlayerProfile(String query, String game);
 
+    Single<ResponsePlayer> getTop(String game, String region);
 
     ApiHeader getApiHeader();
 

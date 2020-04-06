@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:shimmer="http://schemas.android.com/tools">
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="viewModel"
+            type="com.isteel.myfaceit.ui.players.profile.profileInfo.ProfileInfoViewModel"/>
+    </data>
+    <FrameLayout
+        android:background="@color/colorAccentDarker"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.facebook.shimmer.ShimmerFrameLayout
+
+            android:id="@+id/shimmer_view_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:visibility="@{viewModel.isLoading ? View.VISIBLE : View.GONE}"
+            android:orientation="vertical"
+            shimmer:duration="800">
+
+        <!-- Adding 7 rows of placeholders -->
+            <include layout="@layout/data_placeholder_layout" />
+        </com.facebook.shimmer.ShimmerFrameLayout>
+
+        <TextView
+        android:textSize="22sp"
+        android:id="@+id/nick"
+        style="@style/BodyTextStyle"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:nick="@{viewModel.isLoading ? viewModel.str() : viewModel.elo}"
+        />
+        <RelativeLayout
+        android:layout_gravity="center"
+        android:background="@color/colorAccent"
+        android:layout_width="match_parent"
+            android:visibility="@{viewModel.isLoading ? View.GONE : View.VISIBLE}"
+        android:layout_height="190dp">
+
+        <TextView
+            android:layout_margin="5dp"
+            android:id="@+id/elo"
+            style="@style/BodyTextStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:nick="@{viewModel.isLoading ? viewModel.getelo() : viewModel.getelo}"
+            />
+        <TextView
+
+            style="@style/BodyTextStyle"
+            android:layout_margin="5dp"
+            android:id="@+id/maps"
+            android:layout_below="@id/elo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:nick="@{viewModel.isLoading ? viewModel.getelo() : viewModel.getelo}"
+            />
+        <TextView
+            android:layout_margin="5dp"
+            android:id="@+id/kd"
+            android:layout_below="@id/maps"
+            android:layout_width="wrap_content"
+            style="@style/BodyTextStyle"
+            android:layout_height="wrap_content"
+            android:text="@{viewModel.isLoading ? viewModel.getelo() : viewModel.getelo}"
+            />
+        <TextView
+            android:layout_margin="5dp"
+            android:id="@+id/winrate"
+            android:layout_toEndOf="@id/elo"
+            style="@style/BodyTextStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{viewModel.isLoading ? viewModel.getelo() : viewModel.getelo}"
+            />
+    </RelativeLayout>
+    </FrameLayout>
+</layout>

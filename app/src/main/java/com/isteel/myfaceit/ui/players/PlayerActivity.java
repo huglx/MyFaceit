@@ -1,6 +1,5 @@
 package com.isteel.myfaceit.ui.players;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Canvas;
@@ -8,13 +7,11 @@ import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.view.inputmethod.EditorInfo;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.lifecycle.Observer;
+import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -37,11 +34,16 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import dagger.android.AndroidInjector;
+import dagger.android.DispatchingAndroidInjector;
+import dagger.android.support.HasSupportFragmentInjector;
+
 public class PlayerActivity extends BaseActivity<ActivityPlayerBinding, PlayerViewModel>
-        implements PlayerNavigator,PlayerAdapter.GameAdapterListener{
+        implements NavigatorPlayer,PlayerAdapter.GameAdapterListener, HasSupportFragmentInjector {
 
     private ActivityPlayerBinding mainBinding;
-
+    @Inject
+    DispatchingAndroidInjector<Fragment> fragmentDispatchingAndroidInjector;
     @Inject
     ViewModelProviderFactory factory;
 
@@ -83,7 +85,6 @@ public class PlayerActivity extends BaseActivity<ActivityPlayerBinding, PlayerVi
         playerViewModel.setNavigator(this);
         mPlayerAdapter.setListener(this);
 
-        Toast.makeText(this, "231321", Toast.LENGTH_SHORT).show();
     }
 
     private void setUp() {
@@ -165,9 +166,12 @@ public class PlayerActivity extends BaseActivity<ActivityPlayerBinding, PlayerVi
     }
 
     @Override
-    public void updatePlayer(List<ResponsePlayer.Player> gameList) {
-        mPlayerAdapter.clearItems();
-        mPlayerAdapter.addItems(gameList);
+    public void updatePlayer(List<ResponsePlayer.PlayerByNick> gameList) {
+    }
+
+    @Override
+    public void test() {
+
     }
 
     @Override
@@ -189,5 +193,10 @@ public class PlayerActivity extends BaseActivity<ActivityPlayerBinding, PlayerVi
     @Override
     public void onRetryClick() {
 
+    }
+
+    @Override
+    public AndroidInjector<Fragment> supportFragmentInjector() {
+        return fragmentDispatchingAndroidInjector;
     }
 }

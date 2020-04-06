@@ -75,10 +75,10 @@ public abstract class BaseFragment<T extends ViewDataBinding, V extends BaseView
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
-//        performDependencyInjection();
+        performDependencyInjection();
         super.onCreate(savedInstanceState);
         mViewModel = getViewModel();
-        setHasOptionsMenu(true);
+        setHasOptionsMenu(false);
     }
 
     @Override

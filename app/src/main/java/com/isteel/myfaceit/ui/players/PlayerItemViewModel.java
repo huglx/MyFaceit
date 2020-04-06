@@ -1,32 +1,20 @@
 package com.isteel.myfaceit.ui.players;
 
+
+import androidx.databinding.ObservableField;
+
 import com.isteel.myfaceit.data.model.ResponsePlayer;
 
 public class PlayerItemViewModel {
-    public final String nickname;
-    public final String avatar;
-    public final String game;
-    public final String lvl;
+    public final ObservableField<String> nickname;
+    public final ObservableField<String> avatar;
 
-    public final GameItemViewModelListener mListener;
+    private final ResponsePlayer.PlayerByNick mPlayer;
 
-    private final ResponsePlayer.Player mPlayer;
-
-    public PlayerItemViewModel( GameItemViewModelListener mListener, ResponsePlayer.Player player) {
-        this.mListener = mListener;
+    public PlayerItemViewModel( ResponsePlayer.PlayerByNick player) {
         this.mPlayer = player;
-        this.game = mPlayer.getGames().get(0).getGameName();
-        this.lvl = mPlayer.getGames().get(0).getLvl();
-        this.avatar = mPlayer.getAvater();
-        this.nickname = mPlayer.getNickName();
+        this.avatar =new ObservableField<>(mPlayer.getAvater());
+        this.nickname =  new ObservableField<>(mPlayer.getNickName());
     }
 
-    public void onItemClick() {
-        mListener.onItemClick();
-    }
-
-
-    public interface GameItemViewModelListener {
-        void onItemClick();
-    }
 }

@@ -4,8 +4,6 @@ import android.content.Context;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 
-import java.util.ArrayList;
-
 import dagger.Module;
 import dagger.Provides;
 

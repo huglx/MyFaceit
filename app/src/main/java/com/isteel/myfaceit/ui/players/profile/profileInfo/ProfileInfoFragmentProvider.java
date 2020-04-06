@@ -14,15 +14,16 @@
  *  limitations under the License
  */
 
-package com.isteel.myfaceit.ui.players;
+package com.isteel.myfaceit.ui.players.profile.profileInfo;
 
-import com.isteel.myfaceit.data.model.ResponsePlayer;
+import dagger.Module;
+import dagger.android.ContributesAndroidInjector;
 
-import java.util.List;
-
-public interface PlayerNavigator {
-
-    void handleError(Throwable throwable);
-
-    void updatePlayer(List<ResponsePlayer.PlayerByNick> gameList);
+/**
+ * Created by amitshekhar on 14/09/17.
+ */
+@Module
+public abstract class ProfileInfoFragmentProvider {
+    @ContributesAndroidInjector(modules = ProfileInfoFragmentModule.class)
+    abstract ProfileInfoFragment provideBlogFragmentFactory();
 }

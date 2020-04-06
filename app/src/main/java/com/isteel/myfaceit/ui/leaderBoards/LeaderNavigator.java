@@ -25,5 +25,5 @@ public interface LeaderNavigator {
 
     void handleError(Throwable throwable);
 
-    void updateList(List<ResponsePlayer.Player> playerList);
+    void updateList(List<ResponsePlayer.PlayerByNick> playerList);
 }

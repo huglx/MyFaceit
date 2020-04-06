@@ -37,8 +37,6 @@ import com.isteel.myfaceit.di.PreferenceInfo;
 import com.isteel.myfaceit.ui.favourites.FavouritesAdapter;
 import com.isteel.myfaceit.ui.leaderBoards.LeaderAdapter;
 import com.isteel.myfaceit.ui.players.PlayerAdapter;
-import com.isteel.myfaceit.utils.SwipeController;
-import com.isteel.myfaceit.utils.SwipeControllerActions;
 import com.isteel.myfaceit.utils.rx.AppSchedulerProvider;
 import com.isteel.myfaceit.utils.rx.SchedulerProvider;
 
@@ -68,6 +66,7 @@ public class AppModule {
     Context provideContext(Application application) {
         return application;
     }
+
 
 
 

@@ -18,11 +18,9 @@ import com.isteel.myfaceit.R;
 import com.isteel.myfaceit.ViewModelProviderFactory;
 import com.isteel.myfaceit.data.model.ResponsePlayer;
 import com.isteel.myfaceit.databinding.ActivityLeaderBinding;
-import com.isteel.myfaceit.databinding.ActivityPlayerBinding;
 import com.isteel.myfaceit.ui.base.BaseActivity;
 import com.isteel.myfaceit.ui.favourites.FavouritesActivity;
 import com.isteel.myfaceit.ui.players.PlayerActivity;
-import com.isteel.myfaceit.ui.players.PlayerNavigator;
 import com.isteel.myfaceit.utils.BottomNavigationViewHelper;
 import com.isteel.myfaceit.utils.LogUtil;
 
@@ -138,7 +136,7 @@ public class LeaderActivity extends BaseActivity<ActivityLeaderBinding, LeaderBo
     }
 
     @Override
-    public void updateList(List<ResponsePlayer.Player> playerList) {
+    public void updateList(List<ResponsePlayer.PlayerByNick> playerList) {
         mLeaderAdapter.clearItems();
         mLeaderAdapter.addItems(playerList);
     }

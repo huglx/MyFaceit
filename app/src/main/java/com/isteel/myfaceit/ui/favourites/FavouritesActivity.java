@@ -16,7 +16,6 @@ import com.isteel.myfaceit.R;
 import com.isteel.myfaceit.ViewModelProviderFactory;
 import com.isteel.myfaceit.data.model.ResponseGame;
 import com.isteel.myfaceit.databinding.ActivityGameBinding;
-import com.isteel.myfaceit.databinding.ActivityPlayerBinding;
 import com.isteel.myfaceit.ui.base.BaseActivity;
 import com.isteel.myfaceit.ui.leaderBoards.LeaderActivity;
 import com.isteel.myfaceit.ui.players.PlayerActivity;

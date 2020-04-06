@@ -10,9 +10,9 @@ public class LeaderItemViewModel {
 
     public final GameItemViewModelListener mListener;
 
-    private final ResponsePlayer.Player mPlayer;
+    private final ResponsePlayer.PlayerByNick mPlayer;
 
-    public LeaderItemViewModel(GameItemViewModelListener mListener, ResponsePlayer.Player player) {
+    public LeaderItemViewModel(GameItemViewModelListener mListener, ResponsePlayer.PlayerByNick player) {
         this.mListener = mListener;
         this.mPlayer = player;
         this.nickname = mPlayer.getNickName();

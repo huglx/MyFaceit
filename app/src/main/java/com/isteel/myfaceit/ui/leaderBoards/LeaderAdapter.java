@@ -8,20 +8,18 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.isteel.myfaceit.data.model.ResponsePlayer;
 import com.isteel.myfaceit.databinding.LeaderItemBinding;
-import com.isteel.myfaceit.databinding.PlayerItemBinding;
 import com.isteel.myfaceit.ui.base.BaseViewHolder;
-import com.isteel.myfaceit.ui.players.PlayerAdapter;
 import com.isteel.myfaceit.utils.LogUtil;
 
 import java.util.List;
 
 public class LeaderAdapter extends RecyclerView.Adapter<LeaderAdapter.LeaderViewHolder> {
 
-    private List<ResponsePlayer.Player> mPlayerResponseList;
+    private List<ResponsePlayer.PlayerByNick> mPlayerResponseList;
 
     public GameAdapterListener mListener;
 
-    public LeaderAdapter(List<ResponsePlayer.Player> mPlayerResponseList) {
+    public LeaderAdapter(List<ResponsePlayer.PlayerByNick> mPlayerResponseList) {
         this.mPlayerResponseList = mPlayerResponseList;
 
     }
@@ -47,7 +45,7 @@ public class LeaderAdapter extends RecyclerView.Adapter<LeaderAdapter.LeaderView
         return mPlayerResponseList.size();
     }
 
-    public void addItems(List<ResponsePlayer.Player> playerList) {
+    public void addItems(List<ResponsePlayer.PlayerByNick> playerList) {
         mPlayerResponseList.addAll(playerList);
 
         notifyDataSetChanged();
@@ -78,7 +76,7 @@ public class LeaderAdapter extends RecyclerView.Adapter<LeaderAdapter.LeaderView
 
         @Override
         public void onBind(int position) {
-            final ResponsePlayer.Player player = mPlayerResponseList.get(position);
+            final ResponsePlayer.PlayerByNick player = mPlayerResponseList.get(position);
             viewModel = new LeaderItemViewModel(this, player);
             mBinding.setViewModel(viewModel);
 

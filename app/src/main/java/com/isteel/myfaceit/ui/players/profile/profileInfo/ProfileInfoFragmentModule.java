@@ -14,15 +14,14 @@
  *  limitations under the License
  */
 
-package com.isteel.myfaceit.ui.players;
+package com.isteel.myfaceit.ui.players.profile.profileInfo;
 
-import com.isteel.myfaceit.data.model.ResponsePlayer;
+import dagger.Module;
 
-import java.util.List;
+/**
+ * Created by amitshekhar on 14/09/17.
+ */
+@Module
+public class ProfileInfoFragmentModule {
 
-public interface PlayerNavigator {
-
-    void handleError(Throwable throwable);
-
-    void updatePlayer(List<ResponsePlayer.PlayerByNick> gameList);
 }

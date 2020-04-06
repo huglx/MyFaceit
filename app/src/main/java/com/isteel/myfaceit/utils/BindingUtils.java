@@ -18,6 +18,7 @@ package com.isteel.myfaceit.utils;
 
 import android.content.Context;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.databinding.BindingAdapter;
 import androidx.recyclerview.widget.RecyclerView;
@@ -53,8 +54,13 @@ public final class BindingUtils {
         }
     }
 
+    @BindingAdapter({"android:nick"})
+    public static void nick(TextView blogs, String str) {
+        blogs.setText(str);
+    }
+
     @BindingAdapter({"android:players"})
-    public static void addPlayerItems(RecyclerView recyclerView, List<ResponsePlayer.Player> players) {
+    public static void addPlayerItems(RecyclerView recyclerView, List<ResponsePlayer.PlayerByNick> players) {
         PlayerAdapter adapter = (PlayerAdapter) recyclerView.getAdapter();
         if (adapter != null) {
             adapter.clearItems();
@@ -65,7 +71,7 @@ public final class BindingUtils {
     }
 
     @BindingAdapter({"android:leaders"})
-    public static void addLeaders(RecyclerView recyclerView, List<ResponsePlayer.Player> players) {
+    public static void addLeaders(RecyclerView recyclerView, List<ResponsePlayer.PlayerByNick> players) {
         LeaderAdapter adapter = (LeaderAdapter) recyclerView.getAdapter();
         if (adapter != null) {
             adapter.clearItems();

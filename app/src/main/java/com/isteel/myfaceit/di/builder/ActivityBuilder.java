@@ -18,13 +18,11 @@ package com.isteel.myfaceit.di.builder;
 
 
 import com.isteel.myfaceit.ui.favourites.FavouritesActivity;
-import com.isteel.myfaceit.ui.favourites.GamesFragmentProvider;
 import com.isteel.myfaceit.ui.leaderBoards.LeaderActivity;
-import com.isteel.myfaceit.ui.leaderBoards.LeaderBoardsFragmentProvider;
-import com.isteel.myfaceit.ui.main.MainActivity;
+import com.isteel.myfaceit.ui.players.profile.profileInfo.ProfileInfoFragmentProvider;
+import com.isteel.myfaceit.ui.players.profile.ProfileActivity;
 import com.isteel.myfaceit.ui.players.PlayerActivity;
-import com.isteel.myfaceit.ui.players.PlayerFragmentProvider;
-import com.isteel.myfaceit.ui.teams.TeamsFragmentProvider;
+import com.isteel.myfaceit.ui.players.profile.ProfileActivityModule;
 
 import dagger.Module;
 import dagger.android.ContributesAndroidInjector;
@@ -33,10 +31,9 @@ import dagger.android.ContributesAndroidInjector;
 public abstract class ActivityBuilder {
 
     @ContributesAndroidInjector(modules ={
-            PlayerFragmentProvider.class,
-            LeaderBoardsFragmentProvider.class,
-            GamesFragmentProvider.class})
-    abstract MainActivity bindMainActivity();
+            ProfileInfoFragmentProvider.class,
+            ProfileActivityModule.class})
+    abstract ProfileActivity bindMainActivity();
 
     @ContributesAndroidInjector
     abstract FavouritesActivity bindGameActivity();
@@ -47,4 +44,6 @@ public abstract class ActivityBuilder {
 
     @ContributesAndroidInjector
     abstract PlayerActivity bindPlayerActivity();
+
+
 }

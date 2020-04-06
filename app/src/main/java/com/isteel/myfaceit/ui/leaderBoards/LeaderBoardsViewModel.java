@@ -12,7 +12,7 @@ import java.util.List;
 
 public class LeaderBoardsViewModel extends BaseViewModel<LeaderNavigator> {
 
-    private MutableLiveData<List<ResponsePlayer.Player>> playerListLiveData;
+    private MutableLiveData<List<ResponsePlayer.PlayerByNick>> playerListLiveData;
 
     public LeaderBoardsViewModel(DataManager dataManager, SchedulerProvider schedulerProvider) {
         super(dataManager, schedulerProvider);
@@ -40,7 +40,7 @@ public class LeaderBoardsViewModel extends BaseViewModel<LeaderNavigator> {
                 }));
     }
 
-    public MutableLiveData<List<ResponsePlayer.Player>> getPlayerListLiveData() {
+    public MutableLiveData<List<ResponsePlayer.PlayerByNick>> getPlayerListLiveData() {
         return playerListLiveData;
     }
 }

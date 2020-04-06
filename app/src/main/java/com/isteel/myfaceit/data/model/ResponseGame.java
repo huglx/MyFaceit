@@ -19,6 +19,10 @@ public class ResponseGame {
     }
 
     public static class Game {
+        @Expose
+        @SerializedName("csgo")
+        Csgo csgo;
+
         @SerializedName("game_id")
         String id;
 
@@ -27,6 +31,9 @@ public class ResponseGame {
 
         @SerializedName("skill_level")
         String lvl;
+
+        @SerializedName("faceit_elo")
+        String elo;
 
         @SerializedName("long_label")
         String label;
@@ -39,12 +46,46 @@ public class ResponseGame {
             return lvl;
         }
 
+        public Csgo getCsgo() {
+            return csgo;
+        }
+
         public String getLabel() {
             return label;
         }
 
         public String getId() {
             return id;
+        }
+
+        public String getElo() {
+            return elo;
+        }
+    }
+
+    public static class Csgo {
+        @SerializedName("game_id")
+        String id;
+
+
+        @SerializedName("skill_level")
+        String lvl;
+
+        @SerializedName("faceit_elo")
+        String elo;
+
+
+        public String getLvl() {
+            return lvl;
+        }
+
+
+        public String getId() {
+            return id;
+        }
+
+        public String getElo() {
+            return elo;
         }
     }
 }
