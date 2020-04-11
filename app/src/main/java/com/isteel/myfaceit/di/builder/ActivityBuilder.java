@@ -17,12 +17,15 @@
 package com.isteel.myfaceit.di.builder;
 
 
+import com.isteel.myfaceit.databinding.MapsFragmentBinding;
 import com.isteel.myfaceit.ui.favourites.FavouritesActivity;
 import com.isteel.myfaceit.ui.leaderBoards.LeaderActivity;
 import com.isteel.myfaceit.ui.players.profile.profileInfo.ProfileInfoFragmentProvider;
 import com.isteel.myfaceit.ui.players.profile.ProfileActivity;
 import com.isteel.myfaceit.ui.players.PlayerActivity;
 import com.isteel.myfaceit.ui.players.profile.ProfileActivityModule;
+import com.isteel.myfaceit.ui.players.profile.recentMaps.MapsFragmentModule;
+import com.isteel.myfaceit.ui.players.profile.recentMaps.MapsFragmentProvider;
 
 import dagger.Module;
 import dagger.android.ContributesAndroidInjector;
@@ -32,6 +35,7 @@ public abstract class ActivityBuilder {
 
     @ContributesAndroidInjector(modules ={
             ProfileInfoFragmentProvider.class,
+            MapsFragmentProvider.class,
             ProfileActivityModule.class})
     abstract ProfileActivity bindMainActivity();
 

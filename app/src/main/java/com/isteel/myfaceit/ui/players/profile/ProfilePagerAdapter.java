@@ -47,7 +47,7 @@ public class ProfilePagerAdapter extends FragmentStatePagerAdapter {
         mTabCount = count;
     }
 
-    public void setStr(String str) {
+    public void setIdForProfileFragments(String str) {
         this.str = str;
     }
 
@@ -57,7 +57,7 @@ public class ProfilePagerAdapter extends FragmentStatePagerAdapter {
             case 0:
                 return ProfileInfoFragment.newInstance(str);
             case 1:
-                return RecentMapsFragment.newInstance();
+                return RecentMapsFragment.newInstance(str);
             default:
                 return null;
         }

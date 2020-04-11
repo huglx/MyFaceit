@@ -26,6 +26,9 @@ public class ResponseGame {
         @SerializedName("game_id")
         String id;
 
+        @SerializedName("avatar")
+        String avatar;
+
         @SerializedName("name")
         String gameName;
 
@@ -67,6 +70,14 @@ public class ResponseGame {
         @SerializedName("game_id")
         String id;
 
+        @SerializedName("game_player_name")
+        String game_player_name;
+
+        @SerializedName("lifetime")
+        lifetime lifetime;
+
+        @SerializedName("segments")
+        List<Segment> segmentList;
 
         @SerializedName("skill_level")
         String lvl;
@@ -74,11 +85,21 @@ public class ResponseGame {
         @SerializedName("faceit_elo")
         String elo;
 
+        public List<Segment> getSegmentList() {
+            return segmentList;
+        }
+
+        public String getGame_player_name() {
+            return game_player_name;
+        }
 
         public String getLvl() {
             return lvl;
         }
 
+        public ResponseGame.lifetime getLifetime() {
+            return lifetime;
+        }
 
         public String getId() {
             return id;
@@ -88,4 +109,58 @@ public class ResponseGame {
             return elo;
         }
     }
+
+    public static class lifetime{
+        @SerializedName("Average K/D Ratio")
+        String kd;
+
+        @SerializedName("Win Rate %")
+        String winRate;
+
+        @SerializedName("maps")
+        String maps;
+
+        @SerializedName("Longest Win Streak")
+        String longestWinStreak;
+
+        @SerializedName("Average Headshots %")
+        String hs;
+
+        public String getKd() {
+            return kd;
+        }
+
+        public String getLongestWinStreak() {
+            return longestWinStreak;
+        }
+
+        public String getMaps() {
+            return maps;
+        }
+
+        public String getWinRate() {
+            return winRate;
+        }
+
+        public String getHs() {
+            return hs;
+        }
+    }
+
+    public static class Segment {
+        @SerializedName("label")
+        private String label;
+
+        @SerializedName("img_regular")
+        private String img_regular;
+
+        public String getImg_regular() {
+            return img_regular;
+        }
+
+        public String getLabel() {
+            return label;
+        }
+    }
+
 }

@@ -9,7 +9,10 @@ public final class ApiEndPoint {
 
     public static final String ENDPOINT_PLAYERS = BASE_URL + "/search/players";
 
-    public static final String ENDPOINT_PROFILE = BASE_URL + "/players";
+    public static final String ENDPOINT_PROFILE = BASE_URL + "/players/{player_id}";
+
+    public static final String ENDPOINT_PROFILE_STATS = BASE_URL + "/players/{player_id}/stats/{game_id}";
+
 
     public static final String ENDPOINT_GAMES = BASE_URL + "/games";
 

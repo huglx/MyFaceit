@@ -10,7 +10,9 @@ public interface ApiService {
 
     Single<ResponseGame> getGames();
 
-    Single<ResponsePlayer.Player> getPlayerProfile(String query, String game);
+    Single<ResponseGame.Csgo> getStats(String player_id, String game);
+
+    Single<ResponsePlayer.Player> getPlayerProfile(String id);
 
     Single<ResponsePlayer> getTop(String game, String region);
 

@@ -39,7 +39,6 @@ public class ProfileActivity extends BaseActivity<ActivityProfileBinding, Profil
         Intent intent = new Intent(context, ProfileActivity.class);
         intent.putExtra("id", id);
         return intent;
-
     }
 
     @Override
@@ -62,22 +61,16 @@ public class ProfileActivity extends BaseActivity<ActivityProfileBinding, Profil
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mainBinding = getViewDataBinding();
+
         Intent intent = getIntent();
-        LogUtil.log(intent.getStringExtra("id"));
 
         id1 = intent.getStringExtra("id");
         setUp();
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.search_menu, menu);
-        return true;
-    }
-
     private void setUp() {
         mPagerAdapter.setCount(2);
-        mPagerAdapter.setStr(id1);
+        mPagerAdapter.setIdForProfileFragments(id1);
         mainBinding.feedViewPager.setAdapter(mPagerAdapter);
 
 

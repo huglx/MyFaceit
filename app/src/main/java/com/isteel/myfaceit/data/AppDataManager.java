@@ -37,8 +37,13 @@ public class AppDataManager implements DataManager{
     }
 
     @Override
-    public Single<ResponsePlayer.Player> getPlayerProfile(String query, String game) {
-        return mApiHelper.getPlayerProfile(query, game);
+    public Single<ResponseGame.Csgo> getStats(String player_id, String game) {
+        return mApiHelper.getStats(player_id, game);
+    }
+
+    @Override
+    public Single<ResponsePlayer.Player> getPlayerProfile(String id) {
+        return mApiHelper.getPlayerProfile(id);
     }
 
     @Override

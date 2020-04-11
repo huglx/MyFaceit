@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:imageUrlMap="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.isteel.myfaceit.ui.players.profile.recentMaps.MapItemViewModel" />
+
+    </data>
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_margin="10dp"
+        app:cardCornerRadius="8dp"
+        android:layout_width="match_parent"
+        android:layout_height="120dp">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            
+            <ImageView
+                android:src="@drawable/ic_launcher_foreground"
+                android:imageUrlMap="@{viewModel.img}"
+                android:id="@+id/map_img"
+                android:layout_width="150dp"
+                android:layout_height="match_parent"/>
+
+            <TextView
+                android:text="@{viewModel.label}"
+                android:id="@+id/label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@id/map_img"
+                android:layout_margin="8dp"
+                />
+            
+        </RelativeLayout>
+    </com.google.android.material.card.MaterialCardView>
+</layout>

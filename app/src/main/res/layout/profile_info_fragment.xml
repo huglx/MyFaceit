@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:shimmer="http://schemas.android.com/tools">
+    xmlns:shimmer="http://schemas.android.com/tools"
+
+    xmlns:app="http://schemas.android.com/apk/res-auto">
     <data>
 
         <import type="android.view.View" />
@@ -28,14 +30,54 @@
             <include layout="@layout/data_placeholder_layout" />
         </com.facebook.shimmer.ShimmerFrameLayout>
 
-        <TextView
-        android:textSize="22sp"
-        android:id="@+id/nick"
-        style="@style/BodyTextStyle"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:nick="@{viewModel.isLoading ? viewModel.str() : viewModel.elo}"
-        />
+        <RelativeLayout
+            android:id="@+id/main_info"
+            android:layout_gravity="start"
+            android:background="@color/colorAccent"
+            android:layout_width="match_parent"
+            android:visibility="@{viewModel.isLoading ? View.GONE : View.VISIBLE}"
+            android:layout_height="190dp">
+
+            <ImageView
+                android:layout_marginTop="8dp"
+                android:layout_marginLeft="8dp"
+                android:id="@+id/avatar"
+                android:layout_alignParentStart="true"
+                android:layout_width="74dp"
+                android:layout_height="74dp"
+                app:imageUrl="@{viewModel.isLoading ? viewModel.str() : viewModel.avatar}"
+                android:src="@drawable/ic_launcher_foreground"
+                />
+            <TextView
+                android:layout_toEndOf="@id/avatar"
+                android:id="@+id/nick"
+                style="@style/Head6TextStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:nick="@{viewModel.isLoading ? viewModel.str() : viewModel.nickname}"/>
+
+            <TextView
+                android:layout_toEndOf="@id/nick"
+                android:id="@+id/counrty"
+                style="@style/BodyTextStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:nick="@{viewModel.isLoading ? viewModel.str() : viewModel.country}"
+                />
+
+            <TextView
+                android:layout_toEndOf="@id/avatar"
+                android:layout_below="@id/nick"
+                android:id="@+id/inGameNick"
+                style="@style/Title2TextStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:nick="@{viewModel.isLoading ? viewModel.str() : viewModel.inGameNick}"
+            />
+        </RelativeLayout>
         <RelativeLayout
         android:layout_gravity="center"
         android:background="@color/colorAccent"
@@ -49,7 +91,7 @@
             style="@style/BodyTextStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:nick="@{viewModel.isLoading ? viewModel.getelo() : viewModel.getelo}"
+            android:nick="@{viewModel.isLoading ? viewModel.str() : viewModel.getElo()}"
             />
         <TextView
 
@@ -59,7 +101,7 @@
             android:layout_below="@id/elo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:nick="@{viewModel.isLoading ? viewModel.getelo() : viewModel.getelo}"
+            android:nick="@{viewModel.isLoading ? viewModel.str() : viewModel.maps}"
             />
         <TextView
             android:layout_margin="5dp"
@@ -68,7 +110,7 @@
             android:layout_width="wrap_content"
             style="@style/BodyTextStyle"
             android:layout_height="wrap_content"
-            android:text="@{viewModel.isLoading ? viewModel.getelo() : viewModel.getelo}"
+            android:nick="@{viewModel.isLoading ? viewModel.str() : viewModel.kd}"
             />
         <TextView
             android:layout_margin="5dp"
@@ -77,8 +119,28 @@
             style="@style/BodyTextStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@{viewModel.isLoading ? viewModel.getelo() : viewModel.getelo}"
+            android:text="@{viewModel.isLoading ? viewModel.str() : viewModel.winRate}"
             />
+            <TextView
+                android:layout_margin="5dp"
+                android:id="@+id/winStreak"
+                android:layout_below="@id/winrate"
+                style="@style/BodyTextStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{viewModel.isLoading ? viewModel.str() : viewModel.winStreak}"
+                />
+
+            <TextView
+                android:layout_margin="5dp"
+                android:id="@+id/hs"
+                android:layout_below="@id/elo"
+                android:layout_toEndOf="@id/winStreak"
+                style="@style/BodyTextStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{viewModel.isLoading ? viewModel.str() : viewModel.hs}"
+                />
     </RelativeLayout>
     </FrameLayout>
 </layout>

@@ -5,11 +5,13 @@ import androidx.lifecycle.ViewModelProvider;
 
 
 import com.isteel.myfaceit.data.DataManager;
+import com.isteel.myfaceit.databinding.MapsFragmentBinding;
 import com.isteel.myfaceit.ui.favourites.FavouritesViewModel;
 import com.isteel.myfaceit.ui.leaderBoards.LeaderBoardsViewModel;
 import com.isteel.myfaceit.ui.players.profile.profileInfo.ProfileInfoViewModel;
 import com.isteel.myfaceit.ui.players.profile.ProfileViewModel;
 import com.isteel.myfaceit.ui.players.PlayerViewModel;
+import com.isteel.myfaceit.ui.players.profile.recentMaps.RecentMapsViewModel;
 import com.isteel.myfaceit.ui.teams.TeamsViewModel;
 import com.isteel.myfaceit.utils.rx.SchedulerProvider;
 
@@ -46,8 +48,12 @@ public class ViewModelProviderFactory extends ViewModelProvider.NewInstanceFacto
       return (T) new LeaderBoardsViewModel(dataManager, schedulerProvider);
     }
       else if (modelClass.isAssignableFrom(ProfileInfoViewModel.class)) {
+      //noinspection unchecked
+      return (T) new ProfileInfoViewModel(dataManager, schedulerProvider);
+    }
+        else if (modelClass.isAssignableFrom(RecentMapsViewModel.class)) {
         //noinspection unchecked
-        return (T) new ProfileInfoViewModel(dataManager, schedulerProvider);
+        return (T) new RecentMapsViewModel(dataManager, schedulerProvider);
     }else if (modelClass.isAssignableFrom(TeamsViewModel.class)) {
       //noinspection unchecked
       return (T) new TeamsViewModel(dataManager, schedulerProvider);

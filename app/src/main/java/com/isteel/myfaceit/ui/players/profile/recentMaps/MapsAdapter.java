@@ -1,4 +1,4 @@
-package com.isteel.myfaceit.ui.players;
+package com.isteel.myfaceit.ui.players.profile.recentMaps;
 
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
@@ -6,52 +6,53 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.isteel.myfaceit.data.model.ResponseGame;
 import com.isteel.myfaceit.data.model.ResponsePlayer;
+import com.isteel.myfaceit.databinding.MapItemBinding;
 import com.isteel.myfaceit.databinding.PlayerItemBinding;
 import com.isteel.myfaceit.ui.base.BaseViewHolder;
+import com.isteel.myfaceit.ui.players.PlayerItemViewModel;
 import com.isteel.myfaceit.ui.players.profile.ProfileActivity;
 
 import java.util.List;
 
-public class PlayerAdapter extends RecyclerView.Adapter<PlayerAdapter.PlayerViewHolder> {
+public class MapsAdapter extends RecyclerView.Adapter<MapsAdapter.MapsViewHolder> {
 
-    private List<ResponsePlayer.PlayerByNick> mPlayerResponseList;
+    private List<ResponseGame.Segment> mSegmentList;
 
     public GameAdapterListener mListener;
 
 
-    public PlayerAdapter(List<ResponsePlayer.PlayerByNick> mPlayerResponseList) {
-        this.mPlayerResponseList = mPlayerResponseList;
-
+    public MapsAdapter(List<ResponseGame.Segment> mSegmentList) {
+        this.mSegmentList = mSegmentList;
     }
 
     @NonNull
     @Override
-    public PlayerViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        PlayerItemBinding gameItemViewBinding = PlayerItemBinding.inflate(LayoutInflater.from(parent.getContext()),
+    public MapsViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        MapItemBinding mapsViewBinding = MapItemBinding.inflate(LayoutInflater.from(parent.getContext()),
                 parent, false);
-        return new PlayerViewHolder(gameItemViewBinding);
+        return new MapsViewHolder(mapsViewBinding);
 
     }
 
     @Override
-    public void onBindViewHolder(@NonNull PlayerViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull MapsViewHolder holder, int position) {
         holder.onBind(position);
-        holder.itemView.setOnClickListener(v -> v.getContext().startActivity(ProfileActivity.newIntent(v.getContext(), mPlayerResponseList.get(position).getPlayer_id())));
     }
 
     @Override
     public int getItemCount() {
-        return mPlayerResponseList.size();
+        return mSegmentList.size();
     }
 
-    public void addItems(List<ResponsePlayer.PlayerByNick> playerList) {
-        mPlayerResponseList.addAll(playerList);
+    public void addItems(List<ResponseGame.Segment> segment) {
+        mSegmentList.addAll(segment);
         notifyDataSetChanged();
     }
 
     public void clearItems() {
-        mPlayerResponseList.clear();
+        mSegmentList.clear();
     }
 
 
@@ -63,20 +64,20 @@ public class PlayerAdapter extends RecyclerView.Adapter<PlayerAdapter.PlayerView
         void onRetryClick();
     }
 
-    public class PlayerViewHolder extends BaseViewHolder {
+    public class MapsViewHolder extends BaseViewHolder {
 
-        private PlayerItemBinding mBinding;
-        private PlayerItemViewModel viewModel;
+        private MapItemBinding mBinding;
+        private MapItemViewModel viewModel;
 
-        public PlayerViewHolder(PlayerItemBinding binding) {
+        public MapsViewHolder(MapItemBinding binding) {
             super(binding.getRoot());
             mBinding = binding;
         }
 
         @Override
         public void onBind(int position) {
-            final ResponsePlayer.PlayerByNick player = mPlayerResponseList.get(position);
-            viewModel = new PlayerItemViewModel( player);
+            final ResponseGame.Segment segment = mSegmentList.get(position);
+            viewModel = new MapItemViewModel( segment);
             mBinding.setViewModel(viewModel);
             // Immediate Binding
             // When a variable or observable changes, the binding will be scheduled to change before

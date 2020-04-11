@@ -23,7 +23,7 @@
                 android:textColor="@color/colorPrimary"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:nick="@{viewModel.isLoading ? viewModel.str() : viewModel.getelo}"
+                android:nick="@{viewModel.isLoading ? viewModel.str() : viewModel.getElo()}"
                 />
             <TextView
                 android:textColor="@color/colorPrimary"

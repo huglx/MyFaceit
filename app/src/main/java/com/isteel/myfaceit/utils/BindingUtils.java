@@ -31,6 +31,7 @@ import com.isteel.myfaceit.data.model.ResponsePlayer;
 import com.isteel.myfaceit.ui.favourites.FavouritesAdapter;
 import com.isteel.myfaceit.ui.leaderBoards.LeaderAdapter;
 import com.isteel.myfaceit.ui.players.PlayerAdapter;
+import com.isteel.myfaceit.ui.players.profile.recentMaps.MapsAdapter;
 
 import java.util.List;
 
@@ -81,13 +82,35 @@ public final class BindingUtils {
         }
     }
 
+    @BindingAdapter({"android:maps"})
+    public static void addMaps(RecyclerView recyclerView, List<ResponseGame.Segment> segments) {
+        MapsAdapter adapter = (MapsAdapter) recyclerView.getAdapter();
+        if (adapter != null) {
+            adapter.clearItems();
+            adapter.addItems(segments);
+            recyclerView.scheduleLayoutAnimation();
+
+        }
+    }
+
     @BindingAdapter("imageUrl")
     public static void setImageUrl(ImageView imageView, String url) {
         Context context = imageView.getContext();
-        if( !(url.isEmpty()) ) {
+        if(url != null) {
             Glide.with(context).load(url).apply(RequestOptions.circleCropTransform()).into(imageView);
         }else{
             Glide.with(context).load(R.drawable.ic_launcher_foreground).apply(RequestOptions.circleCropTransform()).into(imageView);
+
+        }
+    }
+
+    @BindingAdapter("android:imageUrlMap")
+    public static void setImageUrlForMaps(ImageView imageView, String url) {
+        Context context = imageView.getContext();
+        if(url != null) {
+            Glide.with(context).load(url).into(imageView);
+        }else{
+            Glide.with(context).load(R.drawable.ic_launcher_foreground).into(imageView);
 
         }
     }

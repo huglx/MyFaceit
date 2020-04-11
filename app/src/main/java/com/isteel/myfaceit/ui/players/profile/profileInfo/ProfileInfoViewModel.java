@@ -13,44 +13,97 @@ public class ProfileInfoViewModel extends BaseViewModel<NavigatorPlayerProfileIn
     public MutableLiveData<String> maps;
     public MutableLiveData<String> kd;
     public MutableLiveData<String> hs;
+    public MutableLiveData<String> nickName;
+    public MutableLiveData<String> avatar;
+    public MutableLiveData<String> winStreak;
+    public MutableLiveData<String> country;
+    public MutableLiveData<String> inGameNick;
+    public MutableLiveData<String> winRate;
+
     public ProfileInfoViewModel(DataManager dataManager, SchedulerProvider schedulerProvider) {
         super(dataManager, schedulerProvider);
         elo = new MutableLiveData<>();
+        nickName = new MutableLiveData<>();
+        kd = new MutableLiveData<>();
+        hs = new MutableLiveData<>();
+        maps = new MutableLiveData<>();
+        winStreak = new MutableLiveData<>();
+        winRate = new MutableLiveData<>();
+        country = new MutableLiveData<>();
+        inGameNick = new MutableLiveData<>();
+        avatar = new MutableLiveData<>();
     }
-    public void fetchData(String querry){
+    public void fetchData(String id){
         setIsLoading(true);
         getCompositeDisposable().add(getDataManager()
-                .getPlayerProfile(querry,"csgo")
+                .getPlayerProfile(id)
                 .subscribeOn(getSchedulerProvider().io())
                 .observeOn(getSchedulerProvider().ui())
                 .subscribe(responsePlayer -> {
                     if (responsePlayer != null) {
-                        getNavigator().updatePlayer(responsePlayer);
                         elo.setValue( responsePlayer.getGames().getCsgo().getElo());
+                        nickName.setValue(responsePlayer.getNickName());
+                        avatar.setValue(responsePlayer.getAvatar());
+                        country.setValue(responsePlayer.getCountry());
+                        inGameNick.setValue(responsePlayer.getGames().getCsgo().getGame_player_name());
+                    }
+                }, throwable -> {
+                    setIsLoading(false);
+                }));
+
+        getCompositeDisposable().add(getDataManager()
+                .getStats(id, "csgo")
+                .subscribeOn(getSchedulerProvider().io())
+                .observeOn(getSchedulerProvider().ui())
+                .subscribe(csgo -> {
+                    if (csgo != null) {
+                        kd.setValue(csgo.getLifetime().getKd());
+                        hs.setValue(csgo.getLifetime().getHs());
+                        maps.setValue(csgo.getLifetime().getMaps());
+                        winStreak.setValue(csgo.getLifetime().getLongestWinStreak());
+                        winRate.setValue(csgo.getLifetime().getWinRate());
                     }setIsLoading(false);
                 }, throwable -> {
                     setIsLoading(false);
-                    getNavigator().handleError(throwable);
                 }));
     }
-
-    public void setElo(String elo) {
-        this.elo.setValue(elo);
+    public String getWinStreak() {
+        return winStreak.getValue();
     }
 
-    public void setMaps(MutableLiveData<String> maps) {
-        this.maps = maps;
+    public String getMaps() {
+        return maps.getValue();
     }
 
-    public void setKd(MutableLiveData<String> kd) {
-        this.kd = kd;
+    public String getWinRate() {
+        return winRate.getValue();
     }
 
-    public void setHs(MutableLiveData<String> hs) {
-        this.hs = hs;
+    public String getNickname() {
+        return nickName.getValue();
     }
 
-    public String getelo() {
+    public String getCountry() {
+        return country.getValue();
+    }
+
+    public String getInGameNick() {
+        return inGameNick.getValue();
+    }
+
+    public String getKD() {
+        return kd.getValue();
+    }
+
+    public String getHS() {
+        return hs.getValue();
+    }
+
+    public String getAvatar() {
+        return avatar.getValue();
+    }
+
+    public String getElo() {
         return elo.getValue();
     }
 

@@ -51,27 +51,33 @@ public class ResponsePlayer {
         @SerializedName("nickname")
         String nickName;
 
+        @SerializedName("country")
+        String country;
+
         @Expose
         @SerializedName("games")
         ResponseGame.Game games;
 
         @SerializedName("avatar")
-        String avater;
+        String avatar;
+
+        public String getCountry() {
+            return country;
+        }
 
         public void setNickName(String nickName) {
             this.nickName = nickName;
             notifyPropertyChanged(BR.nickName);
         }
 
-        public String getAvater() {
-            return avater;
+        public String getAvatar() {
+            return avatar;
         }
-
 
         public ResponseGame.Game getGames() {
             return games;
         }
-        @Bindable
+
         public String getNickName() {
             return nickName;
         }
@@ -81,6 +87,9 @@ public class ResponsePlayer {
 
         @SerializedName("nickname")
         String nickName;
+
+        @SerializedName("player_id")
+        String player_id;
 
         @Expose
         @SerializedName("games")
@@ -92,6 +101,10 @@ public class ResponsePlayer {
         public void setNickName(String nickName) {
             this.nickName = nickName;
             notifyPropertyChanged(BR.nickName);
+        }
+
+        public String getPlayer_id() {
+            return player_id;
         }
 
         public String getAvater() {

@@ -17,7 +17,7 @@ public class PlayerViewModel extends BaseViewModel<NavigatorPlayer> {
     public PlayerViewModel(DataManager dataManager, SchedulerProvider schedulerProvider) {
         super(dataManager, schedulerProvider);
         playerListLiveData = new MutableLiveData<>();
-        //fetchData("skyline4132");
+        fetchData("skyline4132");
     }
 
     public void fetchData(String querry) {

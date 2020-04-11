@@ -51,12 +51,7 @@ public class ProfileInfoFragment extends BaseFragment<ProfileInfoFragmentBinding
 
     @Override
     public ProfileInfoViewModel getViewModel() {
-        Bundle bundle = this.getArguments();
-        assert bundle != null;
-        bundle.getString("id", "lox");
-        LogUtil.log(bundle.getString("id"));
         mViewModel = new ViewModelProvider(this,factory).get(ProfileInfoViewModel.class);
-        mViewModel.fetchData(bundle.getString("id", ""));
         return mViewModel;
     }
 
@@ -70,6 +65,12 @@ public class ProfileInfoFragment extends BaseFragment<ProfileInfoFragmentBinding
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         PersonalInfoFragmentBinding = getViewDataBinding();
+
+        Bundle bundle = this.getArguments();
+        assert bundle != null;
+        bundle.getString("id", "lox");
+
+        mViewModel.fetchData(bundle.getString("id", ""));
 
     }
 
