@@ -4,42 +4,43 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 
 import com.isteel.myfaceit.BR;
 import com.isteel.myfaceit.R;
 import com.isteel.myfaceit.ViewModelProviderFactory;
+import com.isteel.myfaceit.data.model.ResponseGame;
 import com.isteel.myfaceit.databinding.MapsFragmentBinding;
 import com.isteel.myfaceit.ui.base.BaseFragment;
-import com.isteel.myfaceit.ui.base.BaseViewModel;
-import com.isteel.myfaceit.ui.players.PlayerAdapter;
-import com.isteel.myfaceit.ui.players.profile.profileInfo.ProfileInfoFragment;
-import com.isteel.myfaceit.ui.players.profile.profileInfo.ProfileInfoViewModel;
+
+import java.util.List;
 
 import javax.inject.Inject;
 
-public class RecentMapsFragment extends BaseFragment<MapsFragmentBinding, RecentMapsViewModel> {
+public class MapsFragment extends BaseFragment<MapsFragmentBinding, MapsViewModel> implements NavigatorMaps{
 
-    private RecentMapsViewModel mViewModel;
+    private MapsViewModel mViewModel;
     MapsFragmentBinding MapsFragmentBinding;
+    Boolean isRecentMatches;
     @Inject
     ViewModelProviderFactory factory;
-
     @Inject
     MapsAdapter mMapsAdapter;
     @Inject
+    RecentMapsAdapter mRecentMapsAdapter;
+    @Inject
     LinearLayoutManager mLinearLayout;
+    @Inject
+    LinearLayoutManager mLinearLayout2;
 
-    public static RecentMapsFragment newInstance(String str) {
+    public static MapsFragment newInstance(String id, Boolean isRecentMatches) {
         Bundle bundle = new Bundle();
-        bundle.putString("id",str);
-        RecentMapsFragment  MapsFragment = new RecentMapsFragment();
+        bundle.putString("id",id);
+        bundle.putBoolean("isRecentMatches", isRecentMatches);
+        MapsFragment MapsFragment = new MapsFragment();
         MapsFragment.setArguments(bundle);
         return MapsFragment;
     }
@@ -55,8 +56,8 @@ public class RecentMapsFragment extends BaseFragment<MapsFragmentBinding, Recent
     }
 
     @Override
-    public RecentMapsViewModel getViewModel() {
-        mViewModel = new ViewModelProvider(this,factory).get(RecentMapsViewModel.class);
+    public MapsViewModel getViewModel() {
+        mViewModel = new ViewModelProvider(this,factory).get(MapsViewModel.class);
         return mViewModel;
     }
 
@@ -70,17 +71,27 @@ public class RecentMapsFragment extends BaseFragment<MapsFragmentBinding, Recent
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         MapsFragmentBinding = getViewDataBinding();
-        MapsFragmentBinding.recyclerView.setLayoutManager(mLinearLayout);
-        MapsFragmentBinding.recyclerView.setAdapter(mMapsAdapter);
+        MapsFragmentBinding.recyclerViewAllMatches.setLayoutManager(mLinearLayout);
+        MapsFragmentBinding.recyclerViewRecentMatches.setLayoutManager(mLinearLayout2);
 
         Bundle bundle = this.getArguments();
         assert bundle != null;
         bundle.getString("id", "lox");
+        isRecentMatches = bundle.getBoolean("isRecentMatches");
 
+        MapsFragmentBinding.recyclerViewRecentMatches.setAdapter(mRecentMapsAdapter);
+        MapsFragmentBinding.recyclerViewAllMatches.setAdapter(mMapsAdapter);
+        mViewModel.setIsRecentMatches(isRecentMatches);
         mViewModel.fetchData(bundle.getString("id", ""));
+    }
 
+    @Override
+    public void handleError(Throwable throwable) {
 
     }
 
+    @Override
+    public void updatePlayer(List<ResponseGame.Segment> segments) {
 
+    }
 }

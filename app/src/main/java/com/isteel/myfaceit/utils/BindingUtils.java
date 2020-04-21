@@ -27,11 +27,13 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.isteel.myfaceit.R;
 import com.isteel.myfaceit.data.model.ResponseGame;
+import com.isteel.myfaceit.data.model.ResponseMatch;
 import com.isteel.myfaceit.data.model.ResponsePlayer;
 import com.isteel.myfaceit.ui.favourites.FavouritesAdapter;
 import com.isteel.myfaceit.ui.leaderBoards.LeaderAdapter;
 import com.isteel.myfaceit.ui.players.PlayerAdapter;
 import com.isteel.myfaceit.ui.players.profile.recentMaps.MapsAdapter;
+import com.isteel.myfaceit.ui.players.profile.recentMaps.RecentMapsAdapter;
 
 import java.util.List;
 
@@ -85,10 +87,18 @@ public final class BindingUtils {
     @BindingAdapter({"android:maps"})
     public static void addMaps(RecyclerView recyclerView, List<ResponseGame.Segment> segments) {
         MapsAdapter adapter = (MapsAdapter) recyclerView.getAdapter();
-        if (adapter != null) {
+        if (adapter != null && segments!=null && segments.size()!=0) {
             adapter.clearItems();
             adapter.addItems(segments);
-            recyclerView.scheduleLayoutAnimation();
+        }
+    }
+
+    @BindingAdapter({"android:recent_maps"})
+    public static void addRecentMaps(RecyclerView recyclerView, List<ResponseMatch.Match> recentMatches) {
+        RecentMapsAdapter adapter = (RecentMapsAdapter) recyclerView.getAdapter();
+        if (adapter != null) {
+            adapter.clearItems();
+            adapter.addItems(recentMatches);
 
         }
     }

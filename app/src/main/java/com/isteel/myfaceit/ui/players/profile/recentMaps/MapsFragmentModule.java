@@ -17,7 +17,6 @@
 package com.isteel.myfaceit.ui.players.profile.recentMaps;
 
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
 
 import java.util.ArrayList;
 
@@ -32,7 +31,12 @@ public class MapsFragmentModule {
     }
 
     @Provides
-    GridLayoutManager provideLinearLayoutManagerFragment(RecentMapsFragment fragment) {
+    RecentMapsAdapter provideRecentMapsAdapter() {
+        return new RecentMapsAdapter(new ArrayList<>());
+    }
+
+    @Provides
+    GridLayoutManager provideLinearLayoutManagerFragment(MapsFragment fragment) {
         return new GridLayoutManager(fragment.getActivity(),1);
     }
 }

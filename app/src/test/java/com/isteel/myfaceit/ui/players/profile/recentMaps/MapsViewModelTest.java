@@ -1,10 +1,8 @@
-package com.isteel.myfaceit.ui.players.profile.profileInfo;
+package com.isteel.myfaceit.ui.players.profile.recentMaps;
 
 import com.isteel.myfaceit.data.DataManager;
-import com.isteel.myfaceit.data.model.ResponsePlayer;
+import com.isteel.myfaceit.data.model.ResponseGame;
 import com.isteel.myfaceit.rx.TestSchedulerProvider;
-import com.isteel.myfaceit.ui.players.NavigatorPlayer;
-import com.isteel.myfaceit.ui.players.PlayerViewModel;
 
 import org.junit.After;
 import org.junit.Before;
@@ -13,7 +11,6 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import io.reactivex.Single;
@@ -24,12 +21,12 @@ import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.verify;
 
 @RunWith(MockitoJUnitRunner.class)
-public class ProfileInfoViewModelTest {
+public class MapsViewModelTest {
     @Mock
-    NavigatorPlayerProfileInfo mPlayerCallback;
+    NavigatorMaps mCallback;
     @Mock
     DataManager mMockDataManager;
-    private ProfileInfoViewModel profileInfoViewModel;
+    private MapsViewModel mapsViewModel;
     private TestScheduler mTestScheduler;
     TestSchedulerProvider testSchedulerProvider;
 
@@ -37,36 +34,40 @@ public class ProfileInfoViewModelTest {
     public void setUp() throws Exception {
         mTestScheduler = new TestScheduler();
         testSchedulerProvider = new TestSchedulerProvider(mTestScheduler);
-        profileInfoViewModel = new ProfileInfoViewModel(mMockDataManager, testSchedulerProvider);
-        profileInfoViewModel.setNavigator(mPlayerCallback);
+        mapsViewModel = new MapsViewModel(mMockDataManager, testSchedulerProvider);
+        mapsViewModel.setNavigator(mCallback);
     }
 
     @After
     public void tearDown() throws Exception {
         mTestScheduler = null;
-        profileInfoViewModel = null;
-        mPlayerCallback = null;
-
+        mapsViewModel = null;
+        mCallback = null;
     }
     @Test
     public void assertNotNullTest() {
-        assertNotNull(profileInfoViewModel.getSchedulerProvider().io());
-        assertNotNull(mPlayerCallback);
+        assertNotNull(mapsViewModel.getSchedulerProvider().io());
+        assertNotNull(mCallback);
         assertNotNull(mMockDataManager);
     }
+    List<ResponseGame.Segment> segments;
 
     @Test
     public void fetchData() {
-        ResponsePlayer.Player player = new ResponsePlayer.Player();
+        ResponseGame.Segment segmentMock = new ResponseGame.Segment();
 
-        doReturn(Single.just(player))
+        //segments = Arrays.asList(segmentMock, segmentMock);
+        ResponseGame.Csgo csgoMock = new ResponseGame.Csgo();
+
+        csgoMock.setSegmentList(segments);
+        doReturn(Single.just(csgoMock))
                 .when(mMockDataManager)
-                .getPlayerProfile("123");
+                .getStats("123", "csgo");
 
-        profileInfoViewModel.fetchData("123");
+        mapsViewModel.fetchData("123");
 
         mTestScheduler.triggerActions();
-        verify(mPlayerCallback).updatePlayer(player);
+        verify(mCallback).updatePlayer(segments);
     }
 
     @Test
@@ -75,11 +76,11 @@ public class ProfileInfoViewModelTest {
 
         doReturn(Single.error(throwable))
                 .when(mMockDataManager)
-                .getPlayerProfile("123");
+                .getStats("123", "csgo");
 
-        profileInfoViewModel.fetchData("123");
+        mapsViewModel.fetchData("123");
 
         mTestScheduler.triggerActions();
-        verify(mPlayerCallback).handleError(throwable);
+        verify(mCallback).handleError(throwable);
     }
 }

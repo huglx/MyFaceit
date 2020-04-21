@@ -9,23 +9,27 @@
 
         <variable
             name="viewModel"
-            type="com.isteel.myfaceit.ui.players.profile.recentMaps.RecentMapsViewModel"/>
+            type="com.isteel.myfaceit.ui.players.profile.recentMaps.MapsViewModel"/>
     </data>
     <FrameLayout
         android:background="@color/colorAccentDarker"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-        <RelativeLayout
+        <androidx.recyclerview.widget.RecyclerView
+            android:visibility="@{viewModel.isRecentMatches ? View.GONE : View.VISIBLE}"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
-            <androidx.recyclerview.widget.RecyclerView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:id="@+id/recyclerView"
-                android:maps="@{viewModel.mapsList}"
-                tools:listitem="@layout/map_item"
-                />
+            android:layout_height="wrap_content"
+            android:id="@+id/recyclerViewAllMatches"
+            android:maps="@{viewModel.isRecentMatches ? null : viewModel.mapsList }"
+            tools:listitem="@layout/map_item"
+            />
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:recent_maps="@{viewModel.isRecentMatches ? viewModel.matchList : viewModel.matchList }"
+            android:id="@+id/recyclerViewRecentMatches"
+            tools:listitem="@layout/map_item"
+            />
 
-        </RelativeLayout>
     </FrameLayout>
 </layout>

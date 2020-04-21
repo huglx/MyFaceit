@@ -16,9 +16,6 @@
 
 package com.isteel.myfaceit.ui.players.profile.recentMaps;
 
-import com.isteel.myfaceit.ui.players.profile.profileInfo.ProfileInfoFragment;
-import com.isteel.myfaceit.ui.players.profile.profileInfo.ProfileInfoFragmentModule;
-
 import dagger.Module;
 import dagger.android.ContributesAndroidInjector;
 
@@ -28,5 +25,5 @@ import dagger.android.ContributesAndroidInjector;
 @Module
 public abstract class MapsFragmentProvider {
     @ContributesAndroidInjector(modules = MapsFragmentModule.class)
-    abstract RecentMapsFragment provideMapsFragmentFactory();
+    abstract MapsFragment provideMapsFragmentFactory();
 }

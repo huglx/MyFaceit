@@ -1,5 +1,7 @@
 package com.isteel.myfaceit.ui.players.profile.profileInfo;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.os.Bundle;
@@ -15,6 +17,7 @@ import com.isteel.myfaceit.ViewModelProviderFactory;
 import com.isteel.myfaceit.data.model.ResponsePlayer;
 import com.isteel.myfaceit.databinding.ProfileInfoFragmentBinding;
 import com.isteel.myfaceit.ui.base.BaseFragment;
+import com.isteel.myfaceit.ui.players.profile.recentMaps.MapsFragment;
 import com.isteel.myfaceit.utils.LogUtil;
 
 import java.util.List;

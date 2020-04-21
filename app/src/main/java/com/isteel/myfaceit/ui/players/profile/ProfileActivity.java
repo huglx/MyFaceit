@@ -5,6 +5,8 @@ import androidx.lifecycle.ViewModelProvider;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.view.Menu;
 
@@ -69,13 +71,17 @@ public class ProfileActivity extends BaseActivity<ActivityProfileBinding, Profil
     }
 
     private void setUp() {
-        mPagerAdapter.setCount(2);
+        mPagerAdapter.setCount(3);
         mPagerAdapter.setIdForProfileFragments(id1);
         mainBinding.feedViewPager.setAdapter(mPagerAdapter);
 
+        mainBinding.tabLayout.addTab(mainBinding.tabLayout.newTab().setIcon(R.drawable.ic_profile));
+        mainBinding.tabLayout.addTab(mainBinding.tabLayout.newTab().setIcon(R.drawable.ic_map));
+        mainBinding.tabLayout.addTab(mainBinding.tabLayout.newTab().setIcon(R.drawable.ic_recent));
 
-        mainBinding.tabLayout.addTab(mainBinding.tabLayout.newTab().setText("1"));
-        mainBinding.tabLayout.addTab(mainBinding.tabLayout.newTab().setText("2"));
+        mainBinding.tabLayout.getTabAt(0).getIcon().setColorFilter((Color.WHITE), PorterDuff.Mode.SRC_IN);
+        mainBinding.tabLayout.getTabAt(1).getIcon().setColorFilter((Color.BLACK), PorterDuff.Mode.SRC_IN);
+        mainBinding.tabLayout.getTabAt(2).getIcon().setColorFilter((Color.BLACK), PorterDuff.Mode.SRC_IN);
 
         mainBinding.feedViewPager.setOffscreenPageLimit(mainBinding.tabLayout.getTabCount());
         mainBinding.feedViewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(mainBinding.tabLayout));
@@ -84,11 +90,13 @@ public class ProfileActivity extends BaseActivity<ActivityProfileBinding, Profil
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
                 mainBinding.feedViewPager.setCurrentItem(tab.getPosition());
+                tab.getIcon().setColorFilter(Color.WHITE, PorterDuff.Mode.SRC_IN);
 
             }
 
             @Override
             public void onTabUnselected(TabLayout.Tab tab) {
+                tab.getIcon().setColorFilter(Color.BLACK, PorterDuff.Mode.SRC_IN);
 
             }
 

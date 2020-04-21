@@ -13,7 +13,7 @@
 
     <com.google.android.material.card.MaterialCardView
         android:layout_margin="10dp"
-        app:cardCornerRadius="8dp"
+        app:cardCornerRadius="2dp"
         android:layout_width="match_parent"
         android:layout_height="120dp">
         <RelativeLayout
@@ -35,7 +35,33 @@
                 android:layout_toEndOf="@id/map_img"
                 android:layout_margin="8dp"
                 />
-            
+
+            <TextView
+                android:text="@{viewModel.matches}"
+                android:id="@+id/matches"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@id/label"
+                android:layout_margin="8dp"
+                />
+            <TextView
+                android:text="@{viewModel.winrate}"
+                android:id="@+id/winrate"
+                android:layout_below="@id/matches"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@id/label"
+                android:layout_margin="8dp"
+                />
+            <TextView
+                android:text="@{viewModel.kd}"
+                android:id="@+id/kd"
+                android:layout_below="@id/winrate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@id/label"
+                android:layout_margin="8dp"
+                />
         </RelativeLayout>
     </com.google.android.material.card.MaterialCardView>
 </layout>

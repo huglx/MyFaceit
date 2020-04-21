@@ -32,17 +32,13 @@ public class LeaderActivity extends BaseActivity<ActivityLeaderBinding, LeaderBo
         implements LeaderNavigator{
 
     private ActivityLeaderBinding mainBinding;
-
     @Inject
     ViewModelProviderFactory factory;
-
     @Inject
     LeaderAdapter mLeaderAdapter;
     @Inject
     LinearLayoutManager mLinearLayout;
-
     private LeaderBoardsViewModel leaderBoardsViewModel;
-
 
     @Override
     public int getBindingVariable() {
@@ -68,13 +64,8 @@ public class LeaderActivity extends BaseActivity<ActivityLeaderBinding, LeaderBo
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mainBinding = getViewDataBinding();
-        LogUtil.log("dfdf");
         setUp();
         leaderBoardsViewModel.setNavigator(this);
-
-        Toast.makeText(this, "111111111", Toast.LENGTH_SHORT).show();
-        mainBinding.recyclerView.setLayoutManager(mLinearLayout);
-        mainBinding.recyclerView.setAdapter(mLeaderAdapter);
     }
 
     private void setUp() {
@@ -82,6 +73,13 @@ public class LeaderActivity extends BaseActivity<ActivityLeaderBinding, LeaderBo
         if (getSupportActionBar() != null) {
             mainBinding.toolbar.setTitle("Top");
         }
+        mainBinding.recyclerView.setLayoutManager(mLinearLayout);
+        mainBinding.recyclerView.setAdapter(mLeaderAdapter);
+
+        settingBottomNav();
+    }
+
+    private void settingBottomNav() {
         BottomNavigationViewHelper.disableShiftMode(mainBinding.bottomNavigation);
         Menu menu = mainBinding.bottomNavigation.getMenu();
         MenuItem menuItem = menu.getItem(1);
@@ -143,12 +141,6 @@ public class LeaderActivity extends BaseActivity<ActivityLeaderBinding, LeaderBo
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        /*getMenuInflater().inflate(R.menu.search_menu, menu);
-
-        MenuItem item = menu.findItem(R.id.action_search);
-        mainBinding.searchView.setMenuItem(item);
-
-        return true;*/
         return true;
     }
 

@@ -29,7 +29,6 @@ public class PlayerViewModel extends BaseViewModel<NavigatorPlayer> {
                 .subscribe(responsePlayer -> {
                     if (responsePlayer != null && responsePlayer.getItems() != null) {
                         getNavigator().updatePlayer(responsePlayer.getItems());
-
                         playerListLiveData.setValue(responsePlayer.getItems());
                     }setIsLoading(false);
                 }, throwable -> {

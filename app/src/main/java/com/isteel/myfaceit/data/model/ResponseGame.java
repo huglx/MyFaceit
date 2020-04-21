@@ -76,6 +76,10 @@ public class ResponseGame {
         @SerializedName("lifetime")
         lifetime lifetime;
 
+        public void setSegmentList(List<Segment> segmentList) {
+            this.segmentList = segmentList;
+        }
+
         @SerializedName("segments")
         List<Segment> segmentList;
 
@@ -151,6 +155,9 @@ public class ResponseGame {
         @SerializedName("label")
         private String label;
 
+        @SerializedName("stats")
+        private StatsForSegment stats;
+
         @SerializedName("img_regular")
         private String img_regular;
 
@@ -158,8 +165,42 @@ public class ResponseGame {
             return img_regular;
         }
 
+        public StatsForSegment getStats() {
+            return stats;
+        }
+
         public String getLabel() {
             return label;
+        }
+    }
+
+    public static class StatsForSegment{
+        @SerializedName("Average K/D Ratio")
+        String kd;
+
+        @SerializedName("Matches")
+        String matches;
+
+        @SerializedName("K/R Ratio")
+        String kr;
+
+        @SerializedName("Win Rate %")
+        String winRate;
+
+        public String getKd() {
+            return kd;
+        }
+
+        public String getMatches() {
+            return matches;
+        }
+
+        public String getKr() {
+            return kr;
+        }
+
+        public String getWinRate() {
+            return winRate;
         }
     }
 

@@ -65,13 +65,7 @@ FavouritesAdapter.GameAdapterListener, FavouritesNavigator {
         mainBinding = getViewDataBinding();
         setUp();
         mGameAdapter.setListener(this);
-        LogUtil.log("dfdf");
-
         mainViewModel.setNavigator(this);
-        Toast.makeText(this, "231321", Toast.LENGTH_SHORT).show();
-
-        mainBinding.recyclerView.setLayoutManager(mLinearLayout);
-        mainBinding.recyclerView.setAdapter(mGameAdapter);
     }
 
     @Override
@@ -95,38 +89,43 @@ FavouritesAdapter.GameAdapterListener, FavouritesNavigator {
         if (getSupportActionBar() != null) {
             mainBinding.toolbar.setTitle("Games");
         }
+        mainBinding.recyclerView.setLayoutManager(mLinearLayout);
+        mainBinding.recyclerView.setAdapter(mGameAdapter);
+        settingBottomNav();
+    }
 
+    private void settingBottomNav() {
         BottomNavigationViewHelper.disableShiftMode(mainBinding.bottomNavigation);
         Menu menu = mainBinding.bottomNavigation.getMenu();
         MenuItem menuItem = menu.getItem(0);
         menuItem.setChecked(true);
         mainBinding.bottomNavigation.setOnNavigationItemSelectedListener(item ->{
-                switch (item.getItemId()) {
-                    case R.id.PlayersFragment:
-                        //fragment = PLayerFragment.newInstance();
-                        startActivity(PlayerActivity.newIntent(this));
-                        overridePendingTransition(0, 0);
-                        this.finish();
-                        break;
-                    case R.id.gamesFragment:
-                        //    fragment = GamesFragment.newInstance();
-                        startActivity(FavouritesActivity.newIntent(this));
-                        overridePendingTransition(0, 0);
-                        this.finish();
+            switch (item.getItemId()) {
+                case R.id.PlayersFragment:
+                    //fragment = PLayerFragment.newInstance();
+                    startActivity(PlayerActivity.newIntent(this));
+                    overridePendingTransition(0, 0);
+                    this.finish();
+                    break;
+                case R.id.gamesFragment:
+                    //    fragment = GamesFragment.newInstance();
+                    startActivity(FavouritesActivity.newIntent(this));
+                    overridePendingTransition(0, 0);
+                    this.finish();
 
 
-                        break;
-                    case R.id.LeaderBoardsFragment:
-                        //   fragment = LeaderBoardsFragment.newInstance();
-                        startActivity(LeaderActivity.newIntent(this));
-                        overridePendingTransition(0, 0);
+                    break;
+                case R.id.LeaderBoardsFragment:
+                    //   fragment = LeaderBoardsFragment.newInstance();
+                    startActivity(LeaderActivity.newIntent(this));
+                    overridePendingTransition(0, 0);
 
-                        break;
-                }
+                    break;
+            }
             return true;
         });
-
     }
+
 
     @Override
     public void onRetryClick() {

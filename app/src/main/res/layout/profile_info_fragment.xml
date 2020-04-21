@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:shimmer="http://schemas.android.com/tools"
 
     xmlns:app="http://schemas.android.com/apk/res-auto">
@@ -77,6 +78,17 @@
                 android:layout_margin="8dp"
                 android:nick="@{viewModel.isLoading ? viewModel.str() : viewModel.inGameNick}"
             />
+
+            <TextView
+                android:layout_toEndOf="@id/avatar"
+                android:layout_below="@id/inGameNick"
+                android:id="@+id/lvl"
+                style="@style/Title2TextStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:nick="@{viewModel.isLoading ? viewModel.str() : viewModel.lvl}"
+                />
         </RelativeLayout>
         <RelativeLayout
         android:layout_gravity="center"
@@ -94,7 +106,6 @@
             android:nick="@{viewModel.isLoading ? viewModel.str() : viewModel.getElo()}"
             />
         <TextView
-
             style="@style/BodyTextStyle"
             android:layout_margin="5dp"
             android:id="@+id/maps"
@@ -110,7 +121,7 @@
             android:layout_width="wrap_content"
             style="@style/BodyTextStyle"
             android:layout_height="wrap_content"
-            android:nick="@{viewModel.isLoading ? viewModel.str() : viewModel.kd}"
+            android:nick="@{viewModel.isLoading ? viewModel.str() : viewModel.getKD()}"
             />
         <TextView
             android:layout_margin="5dp"
@@ -139,7 +150,7 @@
                 style="@style/BodyTextStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@{viewModel.isLoading ? viewModel.str() : viewModel.hs}"
+                android:text="@{viewModel.isLoading ? viewModel.str() : viewModel.getHS}"
                 />
     </RelativeLayout>
     </FrameLayout>

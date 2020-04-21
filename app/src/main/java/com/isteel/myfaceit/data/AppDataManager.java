@@ -4,6 +4,7 @@ import android.content.Context;
 
 import com.isteel.myfaceit.data.local.prefs.PreferencesHelper;
 import com.isteel.myfaceit.data.model.ResponseGame;
+import com.isteel.myfaceit.data.model.ResponseMatch;
 import com.isteel.myfaceit.data.model.ResponsePlayer;
 import com.isteel.myfaceit.data.remote.ApiHeader;
 import com.isteel.myfaceit.data.remote.ApiHelper;
@@ -34,6 +35,11 @@ public class AppDataManager implements DataManager{
     @Override
     public Single<ResponseGame> getGames() {
         return mApiHelper.getGames();
+    }
+
+    @Override
+    public Single<ResponseMatch> getRecentMatches(String id) {
+        return mApiHelper.getRecentMatches(id);
     }
 
     @Override

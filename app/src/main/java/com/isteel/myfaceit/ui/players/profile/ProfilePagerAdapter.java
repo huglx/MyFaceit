@@ -21,7 +21,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentStatePagerAdapter;
 
 import com.isteel.myfaceit.ui.players.profile.profileInfo.ProfileInfoFragment;
-import com.isteel.myfaceit.ui.players.profile.recentMaps.RecentMapsFragment;
+import com.isteel.myfaceit.ui.players.profile.recentMaps.MapsFragment;
 
 
 /**
@@ -31,11 +31,11 @@ import com.isteel.myfaceit.ui.players.profile.recentMaps.RecentMapsFragment;
 public class ProfilePagerAdapter extends FragmentStatePagerAdapter {
 
     private int mTabCount;
-    private String str;
+    private String id;
 
     public ProfilePagerAdapter(FragmentManager fragmentManager) {
         super(fragmentManager,FragmentStatePagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
-        this.mTabCount = 2;
+        this.mTabCount = 3;
     }
 
     @Override
@@ -47,17 +47,19 @@ public class ProfilePagerAdapter extends FragmentStatePagerAdapter {
         mTabCount = count;
     }
 
-    public void setIdForProfileFragments(String str) {
-        this.str = str;
+    public void setIdForProfileFragments(String id) {
+        this.id = id;
     }
 
     @Override
     public Fragment getItem(int position) {
         switch (position) {
             case 0:
-                return ProfileInfoFragment.newInstance(str);
+                return ProfileInfoFragment.newInstance(id);
             case 1:
-                return RecentMapsFragment.newInstance(str);
+                return MapsFragment.newInstance(id,false);
+            case 2:
+                return MapsFragment.newInstance(id,true);
             default:
                 return null;
         }

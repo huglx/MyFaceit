@@ -9,7 +9,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.isteel.myfaceit.data.model.ResponseGame;
 import com.isteel.myfaceit.data.model.ResponsePlayer;
 import com.isteel.myfaceit.databinding.MapItemBinding;
-import com.isteel.myfaceit.databinding.PlayerItemBinding;
 import com.isteel.myfaceit.ui.base.BaseViewHolder;
 import com.isteel.myfaceit.ui.players.PlayerItemViewModel;
 import com.isteel.myfaceit.ui.players.profile.ProfileActivity;
@@ -47,6 +46,7 @@ public class MapsAdapter extends RecyclerView.Adapter<MapsAdapter.MapsViewHolder
     }
 
     public void addItems(List<ResponseGame.Segment> segment) {
+        assert segment != null;
         mSegmentList.addAll(segment);
         notifyDataSetChanged();
     }

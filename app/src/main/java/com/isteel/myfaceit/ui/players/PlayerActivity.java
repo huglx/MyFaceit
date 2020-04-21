@@ -46,16 +46,12 @@ public class PlayerActivity extends BaseActivity<ActivityPlayerBinding, PlayerVi
     DispatchingAndroidInjector<Fragment> fragmentDispatchingAndroidInjector;
     @Inject
     ViewModelProviderFactory factory;
-
     SwipeController swipeController;
-
     @Inject
     PlayerAdapter mPlayerAdapter;
     @Inject
     LinearLayoutManager mLinearLayout;
-
     private PlayerViewModel playerViewModel;
-
 
     @Override
     public int getBindingVariable() {
@@ -84,7 +80,6 @@ public class PlayerActivity extends BaseActivity<ActivityPlayerBinding, PlayerVi
         setUp();
         playerViewModel.setNavigator(this);
         mPlayerAdapter.setListener(this);
-
     }
 
     private void setUp() {
@@ -92,7 +87,11 @@ public class PlayerActivity extends BaseActivity<ActivityPlayerBinding, PlayerVi
         if (getSupportActionBar() != null) {
             mainBinding.toolbar.setTitle("Search For Players");
         }
+        settingBottomNav();
+        settingSwipeController();
+    }
 
+    private void settingSwipeController() {
         swipeController = new SwipeController(new SwipeControllerActions() {
             @Override
             public void onRightClicked(int position) {
@@ -111,7 +110,9 @@ public class PlayerActivity extends BaseActivity<ActivityPlayerBinding, PlayerVi
                 swipeController.onDraw(c);
             }
         });
+    }
 
+    private void settingBottomNav() {
         BottomNavigationViewHelper.disableShiftMode(mainBinding.bottomNavigation);
         Menu menu = mainBinding.bottomNavigation.getMenu();
         MenuItem menuItem = menu.getItem(2);
@@ -151,7 +152,6 @@ public class PlayerActivity extends BaseActivity<ActivityPlayerBinding, PlayerVi
             }
             return true;
         });
-
     }
 
     @Override

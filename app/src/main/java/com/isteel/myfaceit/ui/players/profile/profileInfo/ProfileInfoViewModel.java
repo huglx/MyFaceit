@@ -19,6 +19,7 @@ public class ProfileInfoViewModel extends BaseViewModel<NavigatorPlayerProfileIn
     public MutableLiveData<String> country;
     public MutableLiveData<String> inGameNick;
     public MutableLiveData<String> winRate;
+    public MutableLiveData<String> lvl;
 
     public ProfileInfoViewModel(DataManager dataManager, SchedulerProvider schedulerProvider) {
         super(dataManager, schedulerProvider);
@@ -32,6 +33,7 @@ public class ProfileInfoViewModel extends BaseViewModel<NavigatorPlayerProfileIn
         country = new MutableLiveData<>();
         inGameNick = new MutableLiveData<>();
         avatar = new MutableLiveData<>();
+        lvl = new MutableLiveData<>();
     }
     public void fetchData(String id){
         setIsLoading(true);
@@ -46,6 +48,7 @@ public class ProfileInfoViewModel extends BaseViewModel<NavigatorPlayerProfileIn
                         avatar.setValue(responsePlayer.getAvatar());
                         country.setValue(responsePlayer.getCountry());
                         inGameNick.setValue(responsePlayer.getGames().getCsgo().getGame_player_name());
+                        lvl.setValue(responsePlayer.getGames().getCsgo().getLvl());
                     }
                 }, throwable -> {
                     setIsLoading(false);
@@ -68,15 +71,19 @@ public class ProfileInfoViewModel extends BaseViewModel<NavigatorPlayerProfileIn
                 }));
     }
     public String getWinStreak() {
-        return winStreak.getValue();
+        return "WinStreak: "+winStreak.getValue();
     }
 
     public String getMaps() {
         return maps.getValue();
     }
 
+    public String getLvl() {
+        return "Faceit level: "+lvl.getValue();
+    }
+
     public String getWinRate() {
-        return winRate.getValue();
+        return "Winrate :"+winRate.getValue();
     }
 
     public String getNickname() {
@@ -88,27 +95,29 @@ public class ProfileInfoViewModel extends BaseViewModel<NavigatorPlayerProfileIn
     }
 
     public String getInGameNick() {
-        return inGameNick.getValue();
+        return "In-game nickname: " + inGameNick.getValue();
     }
 
     public String getKD() {
-        return kd.getValue();
+        return "KD: "+ kd.getValue();
     }
 
     public String getHS() {
-        return hs.getValue();
+        return "HS %: "+hs.getValue();
     }
 
     public String getAvatar() {
-        return avatar.getValue();
+        if (avatar.getValue() == null || avatar.getValue().isEmpty()){
+            return "https://corporate.faceit.com/wp-content/uploads/icon-pheasant-preview-2.png";
+        }else return avatar.getValue();
     }
 
     public String getElo() {
-        return elo.getValue();
+        return "elo: " + elo.getValue();
     }
 
     public String str(){
-        return "1233";
+        return "";
     }
     // TODO: Implement the ViewModel
 }

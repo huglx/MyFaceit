@@ -37,8 +37,6 @@ import com.isteel.myfaceit.di.PreferenceInfo;
 import com.isteel.myfaceit.ui.favourites.FavouritesAdapter;
 import com.isteel.myfaceit.ui.leaderBoards.LeaderAdapter;
 import com.isteel.myfaceit.ui.players.PlayerAdapter;
-import com.isteel.myfaceit.ui.players.profile.recentMaps.MapsAdapter;
-import com.isteel.myfaceit.ui.players.profile.recentMaps.RecentMapsFragment;
 import com.isteel.myfaceit.utils.rx.AppSchedulerProvider;
 import com.isteel.myfaceit.utils.rx.SchedulerProvider;
 
