@@ -27,7 +27,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:id="@+id/recyclerView"
-            app:adapter="@{viewModel.gameListLiveData}"
+            android:favourites="@{viewModel.playerListLiveData}"
             tools:listitem="@layout/player_item"
             />
         </androidx.core.widget.NestedScrollView>
@@ -40,6 +40,7 @@
             android:layout_height="55dp">
 
             <androidx.appcompat.widget.Toolbar
+                app:title="Starred Profiles"
                 android:id="@+id/toolbar"
                 app:layout_scrollFlags="scroll|enterAlways|snap"
                 android:layout_width="match_parent"

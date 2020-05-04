@@ -17,14 +17,23 @@
 package com.isteel.myfaceit.utils;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.drawable.Drawable;
+import android.os.Build;
+import android.view.View;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.databinding.BindingAdapter;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
+import com.bumptech.glide.request.target.SimpleTarget;
+import com.bumptech.glide.request.transition.Transition;
 import com.isteel.myfaceit.R;
 import com.isteel.myfaceit.data.model.ResponseGame;
 import com.isteel.myfaceit.data.model.ResponseMatch;
@@ -32,10 +41,16 @@ import com.isteel.myfaceit.data.model.ResponsePlayer;
 import com.isteel.myfaceit.ui.favourites.FavouritesAdapter;
 import com.isteel.myfaceit.ui.leaderBoards.LeaderAdapter;
 import com.isteel.myfaceit.ui.players.PlayerAdapter;
-import com.isteel.myfaceit.ui.players.profile.recentMaps.MapsAdapter;
+import com.isteel.myfaceit.ui.players.profile.mapsStats.MapsAdapter;
 import com.isteel.myfaceit.ui.players.profile.recentMaps.RecentMapsAdapter;
+import com.isteel.myfaceit.ui.players.profile.recentMaps.recentMapsStats.RecentMapsStatsAdapter;
 
 import java.util.List;
+
+import jp.wasabeef.glide.transformations.BlurTransformation;
+
+import static com.bumptech.glide.request.RequestOptions.bitmapTransform;
+
 
 /**
  * Created by amitshekhar on 11/07/17.
@@ -47,13 +62,13 @@ public final class BindingUtils {
         // This class is not publicly instantiable
     }
 
-    @BindingAdapter({"adapter"})
-    public static void addGameItems(RecyclerView recyclerView, List<ResponseGame.Game> blogs) {
+    @BindingAdapter({"android:favourites"})
+    public static void addProfileItems(RecyclerView recyclerView, List<ResponsePlayer.PlayerByNick> playerByNicks) {
         FavouritesAdapter adapter = (FavouritesAdapter) recyclerView.getAdapter();
 
         if (adapter != null) {
             adapter.clearItems();
-            adapter.addItems(blogs);
+            adapter.addItems(playerByNicks);
         }
     }
 
@@ -103,6 +118,16 @@ public final class BindingUtils {
         }
     }
 
+    @BindingAdapter("android:maps_stats")
+    public static void addRecentMapsStats(RecyclerView recyclerView, List<ResponsePlayer.Player> players) {
+        RecentMapsStatsAdapter adapter = (RecentMapsStatsAdapter) recyclerView.getAdapter();
+        if (adapter != null) {
+            adapter.clearItems();
+            adapter.addItems(players);
+
+        }
+    }
+
     @BindingAdapter("imageUrl")
     public static void setImageUrl(ImageView imageView, String url) {
         Context context = imageView.getContext();
@@ -111,6 +136,19 @@ public final class BindingUtils {
         }else{
             Glide.with(context).load(R.drawable.ic_launcher_foreground).apply(RequestOptions.circleCropTransform()).into(imageView);
 
+        }
+    }
+
+    @BindingAdapter("android:backImageUrl")
+    public static void setImageUrlBackGround(View view, String url) {
+        Context context = view.getContext();
+        if(url != null) {
+            Glide.with(context).load(url).apply(RequestOptions.bitmapTransform(new BlurTransformation(3,1))).into(new SimpleTarget<Drawable>() {
+                @Override
+                public void onResourceReady(@NonNull Drawable resource, @Nullable Transition<? super Drawable> transition) {
+                    view.setBackground(resource);
+                }
+            });
         }
     }
 

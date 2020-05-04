@@ -14,18 +14,29 @@
  *  limitations under the License
  */
 
-package com.isteel.myfaceit.data.local.prefs;
+package com.isteel.myfaceit.data.local.datebase.dao;
 
+import androidx.room.Dao;
+import androidx.room.Insert;
+import androidx.room.OnConflictStrategy;
+import androidx.room.Query;
 
-import com.isteel.myfaceit.data.DataManager;
 import com.isteel.myfaceit.data.model.ResponsePlayer;
+import com.isteel.myfaceit.data.model.db.PlayerByNickDB;
+import com.isteel.myfaceit.ui.players.PlayerViewModel;
 
 import java.util.List;
 
-public interface PreferencesHelper {
-    String getGame();
-    void setGame(String game);
+import io.reactivex.Single;
+@Dao
+public interface ProfileByNickDBDao {
 
-    List<ResponsePlayer.PlayerByNick> getProfile();
-    void setProfile(ResponsePlayer.PlayerByNick profile);
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    void insert(PlayerByNickDB p);
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    void insertAll(List<PlayerByNickDB> playerByNickList);
+
+    @Query("SELECT * FROM playerByNickList")
+    Single<List<PlayerByNickDB>> loadAll();
 }

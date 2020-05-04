@@ -9,27 +9,26 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Toast;
 
 import com.isteel.myfaceit.BR;
 import com.isteel.myfaceit.R;
 import com.isteel.myfaceit.ViewModelProviderFactory;
 import com.isteel.myfaceit.data.model.ResponseGame;
-import com.isteel.myfaceit.databinding.ActivityGameBinding;
+import com.isteel.myfaceit.data.model.ResponsePlayer;
+import com.isteel.myfaceit.databinding.ActivityFavouritesBinding;
 import com.isteel.myfaceit.ui.base.BaseActivity;
 import com.isteel.myfaceit.ui.leaderBoards.LeaderActivity;
 import com.isteel.myfaceit.ui.players.PlayerActivity;
 import com.isteel.myfaceit.utils.BottomNavigationViewHelper;
-import com.isteel.myfaceit.utils.LogUtil;
 
 import java.util.List;
 
 import javax.inject.Inject;
 
-public class FavouritesActivity extends BaseActivity<ActivityGameBinding, FavouritesViewModel> implements
+public class FavouritesActivity extends BaseActivity<ActivityFavouritesBinding, FavouritesViewModel> implements
 FavouritesAdapter.GameAdapterListener, FavouritesNavigator {
 
-    private ActivityGameBinding mainBinding;
+    private ActivityFavouritesBinding mainBinding;
 
     @Inject
     ViewModelProviderFactory factory;
@@ -46,7 +45,7 @@ FavouritesAdapter.GameAdapterListener, FavouritesNavigator {
 
     @Override
     public int getLayoutId() {
-        return R.layout.activity_game;
+        return R.layout.activity_favourites;
     }
 
     public static Intent newIntent(Context context) {
@@ -87,7 +86,7 @@ FavouritesAdapter.GameAdapterListener, FavouritesNavigator {
     private void setUp() {
         setSupportActionBar(mainBinding.toolbar);
         if (getSupportActionBar() != null) {
-            mainBinding.toolbar.setTitle("Games");
+            mainBinding.toolbar.setTitle("Starred Profiles");
         }
         mainBinding.recyclerView.setLayoutManager(mLinearLayout);
         mainBinding.recyclerView.setAdapter(mGameAdapter);
@@ -138,7 +137,7 @@ FavouritesAdapter.GameAdapterListener, FavouritesNavigator {
     }
 
     @Override
-    public void updateBlog(List<ResponseGame.Game> gameList) {
-        mGameAdapter.addItems(gameList);
+    public void updatePlayers(List<ResponsePlayer.PlayerByNick> players) {
+        mGameAdapter.addItems(players);
     }
 }

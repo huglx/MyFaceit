@@ -13,7 +13,9 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:targetApi="m">
-        <activity android:name=".ui.players.PlayerActivity"
+        <activity android:name=".ui.players.profile.recentMaps.recentMapsStats.RecentMapsStatsActivity" />
+        <activity
+            android:name=".ui.players.PlayerActivity"
             android:windowSoftInputMode="adjustPan">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -23,10 +25,7 @@
         </activity>
         <activity android:name=".ui.favourites.FavouritesActivity" />
         <activity android:name=".ui.leaderBoards.LeaderActivity" />
-
-        <activity android:name=".ui.players.profile.ProfileActivity">
-
-        </activity>
+        <activity android:name=".ui.players.profile.ProfileActivity" />
     </application>
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 

@@ -1,8 +1,6 @@
-package com.isteel.myfaceit.ui.players.profile.recentMaps;
+package com.isteel.myfaceit.ui.players.profile.mapsStats;
 
 import com.isteel.myfaceit.data.model.ResponseGame;
-import com.isteel.myfaceit.data.model.ResponsePlayer;
-import com.isteel.myfaceit.ui.players.NavigatorPlayer;
 
 import java.util.List;
 

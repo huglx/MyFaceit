@@ -17,6 +17,7 @@
 package com.isteel.myfaceit.ui.favourites;
 
 import com.isteel.myfaceit.data.model.ResponseGame;
+import com.isteel.myfaceit.data.model.ResponsePlayer;
 
 import java.util.List;
 
@@ -24,5 +25,5 @@ public interface FavouritesNavigator {
 
     void handleError(Throwable throwable);
 
-    void updateBlog(List<ResponseGame.Game> gameList);
+    void updatePlayers(List<ResponsePlayer.PlayerByNick> gameList);
 }

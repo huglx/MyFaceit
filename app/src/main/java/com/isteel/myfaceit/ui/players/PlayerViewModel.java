@@ -1,10 +1,13 @@
 package com.isteel.myfaceit.ui.players;
 
+import android.util.Log;
+
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import com.isteel.myfaceit.data.DataManager;
 import com.isteel.myfaceit.data.model.ResponsePlayer;
+import com.isteel.myfaceit.data.model.db.PlayerByNickDB;
 import com.isteel.myfaceit.ui.base.BaseViewModel;
 import com.isteel.myfaceit.utils.LogUtil;
 import com.isteel.myfaceit.utils.rx.SchedulerProvider;
@@ -40,5 +43,33 @@ public class PlayerViewModel extends BaseViewModel<NavigatorPlayer> {
 
     public LiveData<List<ResponsePlayer.PlayerByNick>> getPlayerListLiveData() {
         return playerListLiveData;
+    }
+
+
+    public void setPlayerByPos(int pos){
+        PlayerByNickDB playerByNickDB = new PlayerByNickDB();
+        playerByNickDB.nickName = playerListLiveData.getValue().get(pos).getNickName();
+       // LogUtil.log(getDataManager().insertPlayer(playerByNickDB)+"123123!@#!@#");
+
+      /*  getCompositeDisposable().add(getDataManager()
+                .insertPlayer(playerByNickDB)
+                .subscribeOn(getSchedulerProvider().io())
+                .observeOn(getSchedulerProvider().ui())
+                .subscribe(responsePlayer -> {
+                    LogUtil.log(responsePlayer +" @#!#!");
+
+                }, throwable -> {
+                    LogUtil.log(throwable.getMessage()+"@#!#!");
+                }));
+*/
+        getCompositeDisposable().add(getDataManager()
+                .getAllPlayers()
+                .subscribeOn(getSchedulerProvider().io())
+                .observeOn(getSchedulerProvider().ui())
+                .subscribe(responsePlayer -> {
+                    LogUtil.log(responsePlayer.get(2).nickName+"@!#!@#");
+                }, throwable -> {
+                    LogUtil.log(throwable.getMessage()+"@#!#!");
+                }));
     }
 }

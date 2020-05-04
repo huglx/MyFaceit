@@ -14,14 +14,17 @@
  *  limitations under the License
  */
 
-package com.isteel.myfaceit.ui.players.profile.recentMaps;
+package com.isteel.myfaceit.ui.players.profile.mapsStats;
 
 import androidx.recyclerview.widget.GridLayoutManager;
+
+import com.isteel.myfaceit.ui.players.profile.recentMaps.RecentMapsAdapter;
 
 import java.util.ArrayList;
 
 import dagger.Module;
 import dagger.Provides;
+
 @Module
 public class MapsFragmentModule {
 

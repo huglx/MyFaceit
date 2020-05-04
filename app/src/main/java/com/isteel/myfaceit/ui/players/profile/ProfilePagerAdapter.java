@@ -20,8 +20,8 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentStatePagerAdapter;
 
+import com.isteel.myfaceit.ui.players.profile.mapsStats.MapsFragment;
 import com.isteel.myfaceit.ui.players.profile.profileInfo.ProfileInfoFragment;
-import com.isteel.myfaceit.ui.players.profile.recentMaps.MapsFragment;
 
 
 /**

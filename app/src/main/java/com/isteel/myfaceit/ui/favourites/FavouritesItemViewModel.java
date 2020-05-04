@@ -1,18 +1,21 @@
 package com.isteel.myfaceit.ui.favourites;
 
+import androidx.databinding.ObservableField;
+
 import com.isteel.myfaceit.data.model.ResponseGame.Game;
+import com.isteel.myfaceit.data.model.ResponsePlayer;
 
 public class FavouritesItemViewModel {
-    public final String label;
+    public final ObservableField<String> nick;
 
     public final GameItemViewModelListener mListener;
 
-    private final Game mGame;
+    private final ResponsePlayer.PlayerByNick mPlayer;
 
-    public FavouritesItemViewModel(GameItemViewModelListener mListener, Game game) {
+    public FavouritesItemViewModel(GameItemViewModelListener mListener, ResponsePlayer.PlayerByNick player) {
         this.mListener = mListener;
-        this.mGame = game;
-        this.label = mGame.getLabel();
+        this.mPlayer = player;
+        this.nick = new ObservableField<>(mPlayer.getNickName());
     }
 
     public void onItemClick() {

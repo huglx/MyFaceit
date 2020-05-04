@@ -21,6 +21,7 @@ import android.app.Application;
 import android.content.Context;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.room.Room;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -28,11 +29,15 @@ import com.isteel.myfaceit.BuildConfig;
 import com.isteel.myfaceit.ViewModelProviderFactory;
 import com.isteel.myfaceit.data.AppDataManager;
 import com.isteel.myfaceit.data.DataManager;
+import com.isteel.myfaceit.data.local.datebase.AppDatabase;
+import com.isteel.myfaceit.data.local.datebase.AppDbHelper;
+import com.isteel.myfaceit.data.local.datebase.DbHelper;
 import com.isteel.myfaceit.data.local.prefs.AppPreferencesHelper;
 import com.isteel.myfaceit.data.local.prefs.PreferencesHelper;
 import com.isteel.myfaceit.data.remote.ApiHelper;
 import com.isteel.myfaceit.data.remote.ApiService;
 import com.isteel.myfaceit.di.ApiInfo;
+import com.isteel.myfaceit.di.DatabaseInfo;
 import com.isteel.myfaceit.di.PreferenceInfo;
 import com.isteel.myfaceit.ui.favourites.FavouritesAdapter;
 import com.isteel.myfaceit.ui.leaderBoards.LeaderAdapter;
@@ -67,8 +72,12 @@ public class AppModule {
         return application;
     }
 
-
-
+    @Provides
+    @Singleton
+    AppDatabase provideAppDatabase(@DatabaseInfo String dbName, Context context) {
+        return Room.databaseBuilder(context, AppDatabase.class, "db_faceit").fallbackToDestructiveMigration()
+                .build();
+    }
 
     @Provides
     ViewModelProviderFactory viewModelProviderFactory(DataManager dataManager,
@@ -94,6 +103,18 @@ public class AppModule {
     @PreferenceInfo
     String providePreferenceName() {
         return "pref";
+    }
+
+    @Provides
+    @DatabaseInfo
+    String provideDatabaseName() {
+        return "db_my_faceit";
+    }
+
+    @Provides
+    @Singleton
+    DbHelper provideDbHelper(AppDbHelper appDbHelper) {
+        return appDbHelper;
     }
 
     @Provides

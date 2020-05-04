@@ -14,7 +14,7 @@
  *  limitations under the License
  */
 
-package com.isteel.myfaceit.ui.players.profile.recentMaps;
+package com.isteel.myfaceit.ui.players.profile.mapsStats;
 
 import dagger.Module;
 import dagger.android.ContributesAndroidInjector;

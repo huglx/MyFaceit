@@ -1,13 +1,12 @@
-package com.isteel.myfaceit.ui.players.profile.recentMaps;
+package com.isteel.myfaceit.ui.players.profile.mapsStats;
 
 import android.os.Bundle;
+import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
-
-import android.view.View;
 
 import com.isteel.myfaceit.BR;
 import com.isteel.myfaceit.R;
@@ -15,12 +14,13 @@ import com.isteel.myfaceit.ViewModelProviderFactory;
 import com.isteel.myfaceit.data.model.ResponseGame;
 import com.isteel.myfaceit.databinding.MapsFragmentBinding;
 import com.isteel.myfaceit.ui.base.BaseFragment;
+import com.isteel.myfaceit.ui.players.profile.recentMaps.RecentMapsAdapter;
 
 import java.util.List;
 
 import javax.inject.Inject;
 
-public class MapsFragment extends BaseFragment<MapsFragmentBinding, MapsViewModel> implements NavigatorMaps{
+public class MapsFragment extends BaseFragment<MapsFragmentBinding, MapsViewModel> implements NavigatorMaps {
 
     private MapsViewModel mViewModel;
     MapsFragmentBinding MapsFragmentBinding;

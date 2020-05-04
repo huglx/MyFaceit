@@ -48,6 +48,10 @@ public class ResponsePlayer {
 
     public static class Player extends BaseObservable{
 
+        public Player(String nickName){
+            setNickName(nickName);
+        }
+
         @SerializedName("nickname")
         String nickName;
 

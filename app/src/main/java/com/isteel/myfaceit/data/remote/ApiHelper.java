@@ -58,6 +58,15 @@ public class ApiHelper implements ApiService{
     }
 
     @Override
+    public Single<ResponseMatch> getRecentMatchesStats(String id) {
+        return Rx2AndroidNetworking.get(ApiEndPoint.ENDPOINT_RECENT_MATCHES_STATS)
+                .addHeaders("Authorization","Bearer " + mApiHeader.getPublicApiHeader().getApiKey().trim())
+                .addPathParameter("match_id", id)
+                .build()
+                .getObjectSingle(ResponseMatch.class);
+    }
+
+    @Override
     public Single<ResponseGame.Csgo> getStats(String player_id, String game) {
         return Rx2AndroidNetworking.get(ApiEndPoint.ENDPOINT_PROFILE_STATS)
                 .addHeaders("Authorization","Bearer " + mApiHeader.getPublicApiHeader().getApiKey().trim())

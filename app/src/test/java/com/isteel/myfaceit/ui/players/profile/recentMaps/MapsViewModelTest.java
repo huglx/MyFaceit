@@ -3,6 +3,8 @@ package com.isteel.myfaceit.ui.players.profile.recentMaps;
 import com.isteel.myfaceit.data.DataManager;
 import com.isteel.myfaceit.data.model.ResponseGame;
 import com.isteel.myfaceit.rx.TestSchedulerProvider;
+import com.isteel.myfaceit.ui.players.profile.mapsStats.MapsViewModel;
+import com.isteel.myfaceit.ui.players.profile.mapsStats.NavigatorMaps;
 
 import org.junit.After;
 import org.junit.Before;

@@ -13,6 +13,8 @@ public interface ApiService {
 
     Single<ResponseMatch> getRecentMatches(String id);
 
+    Single<ResponseMatch> getRecentMatchesStats(String id);
+
     Single<ResponseGame.Csgo> getStats(String player_id, String game);
 
     Single<ResponsePlayer.Player> getPlayerProfile(String id);

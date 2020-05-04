@@ -1,4 +1,4 @@
-package com.isteel.myfaceit.ui.players.profile.recentMaps;
+package com.isteel.myfaceit.ui.players.profile.mapsStats;
 
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
@@ -7,11 +7,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.isteel.myfaceit.data.model.ResponseGame;
-import com.isteel.myfaceit.data.model.ResponsePlayer;
 import com.isteel.myfaceit.databinding.MapItemBinding;
 import com.isteel.myfaceit.ui.base.BaseViewHolder;
-import com.isteel.myfaceit.ui.players.PlayerItemViewModel;
-import com.isteel.myfaceit.ui.players.profile.ProfileActivity;
 
 import java.util.List;
 

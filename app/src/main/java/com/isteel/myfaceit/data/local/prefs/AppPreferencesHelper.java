@@ -19,7 +19,11 @@ package com.isteel.myfaceit.data.local.prefs;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+import com.isteel.myfaceit.data.model.ResponsePlayer;
 import com.isteel.myfaceit.di.PreferenceInfo;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -27,12 +31,15 @@ import javax.inject.Inject;
 public class AppPreferencesHelper implements PreferencesHelper {
 
     private static final String PREF_GAME = "PREF_GAME";
+    private static final String PREF_PROFILE = "PREF_PROFILE";
+    private List<ResponsePlayer.PlayerByNick> playerByNickList;
 
     private final SharedPreferences mPrefs;
 
     @Inject
     public AppPreferencesHelper(Context context, @PreferenceInfo String prefFileName) {
         mPrefs = context.getSharedPreferences(prefFileName, Context.MODE_PRIVATE);
+        playerByNickList = new ArrayList<>();
     }
 
     @Override
@@ -43,5 +50,16 @@ public class AppPreferencesHelper implements PreferencesHelper {
     @Override
     public void setGame(String game) {
         mPrefs.edit().putString(PREF_GAME, game).apply();
+    }
+
+    @Override
+    public List<ResponsePlayer.PlayerByNick> getProfile() {
+        return playerByNickList;
+    }
+
+    @Override
+    public void setProfile(ResponsePlayer.PlayerByNick profile) {
+        if(profile!=null)
+        playerByNickList.add(profile);
     }
 }

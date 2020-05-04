@@ -1,6 +1,4 @@
-package com.isteel.myfaceit.ui.players.profile.recentMaps;
-
-import android.util.Log;
+package com.isteel.myfaceit.ui.players.profile.mapsStats;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
@@ -8,12 +6,9 @@ import androidx.lifecycle.MutableLiveData;
 import com.isteel.myfaceit.data.DataManager;
 import com.isteel.myfaceit.data.model.ResponseGame;
 import com.isteel.myfaceit.data.model.ResponseMatch;
-import com.isteel.myfaceit.data.model.ResponsePlayer;
 import com.isteel.myfaceit.ui.base.BaseViewModel;
-import com.isteel.myfaceit.utils.LogUtil;
 import com.isteel.myfaceit.utils.rx.SchedulerProvider;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class MapsViewModel extends BaseViewModel<NavigatorMaps> {
@@ -31,7 +26,6 @@ public class MapsViewModel extends BaseViewModel<NavigatorMaps> {
 
     public void fetchData(String id){
             setIsLoading(true);
-
             if(isRecentMatches) {
                 getCompositeDisposable().add(getDataManager()
                         .getRecentMatches(id)

@@ -7,6 +7,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.isteel.myfaceit.data.model.ResponseGame;
+import com.isteel.myfaceit.data.model.ResponsePlayer;
 import com.isteel.myfaceit.databinding.GameItemBinding;
 import com.isteel.myfaceit.ui.base.BaseViewHolder;
 import com.isteel.myfaceit.utils.LogUtil;
@@ -15,11 +16,11 @@ import java.util.List;
 
 public class FavouritesAdapter extends RecyclerView.Adapter<FavouritesAdapter.GameViewHolder> {
 
-    private List<ResponseGame.Game> mGameResponseList;
+    private List<ResponsePlayer.PlayerByNick> mGameResponseList;
 
     public GameAdapterListener mListener;
 
-    public FavouritesAdapter(List<ResponseGame.Game> mGameResponseList) {
+    public FavouritesAdapter(List<ResponsePlayer.PlayerByNick> mGameResponseList) {
         this.mGameResponseList = mGameResponseList;
 
     }
@@ -45,7 +46,7 @@ public class FavouritesAdapter extends RecyclerView.Adapter<FavouritesAdapter.Ga
         return mGameResponseList.size();
     }
 
-    public void addItems(List<ResponseGame.Game> gameList) {
+    public void addItems(List<ResponsePlayer.PlayerByNick> gameList) {
         mGameResponseList.addAll(gameList);
 
         notifyDataSetChanged();
@@ -76,7 +77,7 @@ public class FavouritesAdapter extends RecyclerView.Adapter<FavouritesAdapter.Ga
 
         @Override
         public void onBind(int position) {
-            final ResponseGame.Game game = mGameResponseList.get(position);
+            final ResponsePlayer.PlayerByNick game = mGameResponseList.get(position);
             viewModel = new FavouritesItemViewModel(this, game);
             mBinding.setViewModel(viewModel);
 

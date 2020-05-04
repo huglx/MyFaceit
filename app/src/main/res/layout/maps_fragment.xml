@@ -9,7 +9,7 @@
 
         <variable
             name="viewModel"
-            type="com.isteel.myfaceit.ui.players.profile.recentMaps.MapsViewModel"/>
+            type="com.isteel.myfaceit.ui.players.profile.mapsStats.MapsViewModel"/>
     </data>
     <FrameLayout
         android:background="@color/colorAccentDarker"

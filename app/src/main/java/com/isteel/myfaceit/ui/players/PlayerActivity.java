@@ -95,7 +95,7 @@ public class PlayerActivity extends BaseActivity<ActivityPlayerBinding, PlayerVi
         swipeController = new SwipeController(new SwipeControllerActions() {
             @Override
             public void onRightClicked(int position) {
-                LogUtil.log(""+position);
+                playerViewModel.setPlayerByPos(position);
             }
         });
 

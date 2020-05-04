@@ -1,7 +1,5 @@
 package com.isteel.myfaceit.ui.players.profile.recentMaps;
 
-import android.content.Intent;
-import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
@@ -11,8 +9,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.isteel.myfaceit.data.model.ResponseMatch;
 import com.isteel.myfaceit.databinding.RecentMapsItemBinding;
 import com.isteel.myfaceit.ui.base.BaseViewHolder;
+import com.isteel.myfaceit.ui.players.profile.recentMaps.recentMapsStats.RecentMapsStatsActivity;
 
 import java.util.List;
+
+import static androidx.core.content.ContextCompat.startActivity;
 
 public class RecentMapsAdapter extends RecyclerView.Adapter<RecentMapsAdapter.RecentMapsViewHolder> {
 
@@ -74,14 +75,11 @@ public class RecentMapsAdapter extends RecyclerView.Adapter<RecentMapsAdapter.Re
         }
 
         @Override
-        public void onItemClick(String url) {
-            if (url != null) {
+        public void onItemClick(String id) {
+            if (id != null) {
                 try {
-                    Intent intent = new Intent();
-                    intent.setAction(Intent.ACTION_VIEW);
-                    intent.addCategory(Intent.CATEGORY_BROWSABLE);
-                    intent.setData(Uri.parse(url));
-                    itemView.getContext().startActivity(intent);
+
+                    startActivity(itemView.getContext(), RecentMapsStatsActivity.newIntent(itemView.getContext(), id),null);
                 } catch (Exception e) {
 
                 }

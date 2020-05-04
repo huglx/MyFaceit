@@ -1,4 +1,4 @@
-package com.isteel.myfaceit.ui.players.profile.recentMaps;
+package com.isteel.myfaceit.ui.players.profile.mapsStats;
 
 
 import androidx.databinding.ObservableField;
