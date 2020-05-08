@@ -13,8 +13,7 @@ import android.view.MenuItem;
 import com.isteel.myfaceit.BR;
 import com.isteel.myfaceit.R;
 import com.isteel.myfaceit.ViewModelProviderFactory;
-import com.isteel.myfaceit.data.model.ResponseGame;
-import com.isteel.myfaceit.data.model.ResponsePlayer;
+import com.isteel.myfaceit.data.model.db.PlayerByNickDB;
 import com.isteel.myfaceit.databinding.ActivityFavouritesBinding;
 import com.isteel.myfaceit.ui.base.BaseActivity;
 import com.isteel.myfaceit.ui.leaderBoards.LeaderActivity;
@@ -137,7 +136,7 @@ FavouritesAdapter.GameAdapterListener, FavouritesNavigator {
     }
 
     @Override
-    public void updatePlayers(List<ResponsePlayer.PlayerByNick> players) {
+    public void updatePlayers(List<PlayerByNickDB> players) {
         mGameAdapter.addItems(players);
     }
 }

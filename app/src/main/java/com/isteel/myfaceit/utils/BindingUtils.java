@@ -17,12 +17,9 @@
 package com.isteel.myfaceit.utils;
 
 import android.content.Context;
-import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
-import android.os.Build;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -38,6 +35,7 @@ import com.isteel.myfaceit.R;
 import com.isteel.myfaceit.data.model.ResponseGame;
 import com.isteel.myfaceit.data.model.ResponseMatch;
 import com.isteel.myfaceit.data.model.ResponsePlayer;
+import com.isteel.myfaceit.data.model.db.PlayerByNickDB;
 import com.isteel.myfaceit.ui.favourites.FavouritesAdapter;
 import com.isteel.myfaceit.ui.leaderBoards.LeaderAdapter;
 import com.isteel.myfaceit.ui.players.PlayerAdapter;
@@ -48,8 +46,6 @@ import com.isteel.myfaceit.ui.players.profile.recentMaps.recentMapsStats.RecentM
 import java.util.List;
 
 import jp.wasabeef.glide.transformations.BlurTransformation;
-
-import static com.bumptech.glide.request.RequestOptions.bitmapTransform;
 
 
 /**
@@ -63,7 +59,7 @@ public final class BindingUtils {
     }
 
     @BindingAdapter({"android:favourites"})
-    public static void addProfileItems(RecyclerView recyclerView, List<ResponsePlayer.PlayerByNick> playerByNicks) {
+    public static void addProfileItems(RecyclerView recyclerView, List<PlayerByNickDB> playerByNicks) {
         FavouritesAdapter adapter = (FavouritesAdapter) recyclerView.getAdapter();
 
         if (adapter != null) {

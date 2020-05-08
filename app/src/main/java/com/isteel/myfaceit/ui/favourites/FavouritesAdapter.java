@@ -6,21 +6,24 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.isteel.myfaceit.data.model.ResponseGame;
-import com.isteel.myfaceit.data.model.ResponsePlayer;
+import com.isteel.myfaceit.data.model.db.PlayerByNickDB;
 import com.isteel.myfaceit.databinding.GameItemBinding;
 import com.isteel.myfaceit.ui.base.BaseViewHolder;
+import com.isteel.myfaceit.ui.players.profile.ProfileActivity;
+import com.isteel.myfaceit.ui.players.profile.recentMaps.recentMapsStats.RecentMapsStatsActivity;
 import com.isteel.myfaceit.utils.LogUtil;
 
 import java.util.List;
 
+import static androidx.core.content.ContextCompat.startActivity;
+
 public class FavouritesAdapter extends RecyclerView.Adapter<FavouritesAdapter.GameViewHolder> {
 
-    private List<ResponsePlayer.PlayerByNick> mGameResponseList;
+    private List<PlayerByNickDB> mGameResponseList;
 
     public GameAdapterListener mListener;
 
-    public FavouritesAdapter(List<ResponsePlayer.PlayerByNick> mGameResponseList) {
+    public FavouritesAdapter(List<PlayerByNickDB> mGameResponseList) {
         this.mGameResponseList = mGameResponseList;
 
     }
@@ -46,7 +49,7 @@ public class FavouritesAdapter extends RecyclerView.Adapter<FavouritesAdapter.Ga
         return mGameResponseList.size();
     }
 
-    public void addItems(List<ResponsePlayer.PlayerByNick> gameList) {
+    public void addItems(List<PlayerByNickDB> gameList) {
         mGameResponseList.addAll(gameList);
 
         notifyDataSetChanged();
@@ -77,7 +80,7 @@ public class FavouritesAdapter extends RecyclerView.Adapter<FavouritesAdapter.Ga
 
         @Override
         public void onBind(int position) {
-            final ResponsePlayer.PlayerByNick game = mGameResponseList.get(position);
+            final PlayerByNickDB game = mGameResponseList.get(position);
             viewModel = new FavouritesItemViewModel(this, game);
             mBinding.setViewModel(viewModel);
 
@@ -89,8 +92,15 @@ public class FavouritesAdapter extends RecyclerView.Adapter<FavouritesAdapter.Ga
         }
 
         @Override
-        public void onItemClick() {
+        public void onItemClick(String id) {
+            if (id != null) {
+                try {
 
+                    startActivity(itemView.getContext(), ProfileActivity.newIntent(itemView.getContext(), id),null);
+                } catch (Exception e) {
+
+                }
+            }
         }
     }
 }

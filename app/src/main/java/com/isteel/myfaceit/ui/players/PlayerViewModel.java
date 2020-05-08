@@ -49,9 +49,12 @@ public class PlayerViewModel extends BaseViewModel<NavigatorPlayer> {
     public void setPlayerByPos(int pos){
         PlayerByNickDB playerByNickDB = new PlayerByNickDB();
         playerByNickDB.nickName = playerListLiveData.getValue().get(pos).getNickName();
+        playerByNickDB.playerId = playerListLiveData.getValue().get(pos).getPlayer_id();
+        playerByNickDB.avatar = playerListLiveData.getValue().get(pos).getAvater();
+
        // LogUtil.log(getDataManager().insertPlayer(playerByNickDB)+"123123!@#!@#");
 
-      /*  getCompositeDisposable().add(getDataManager()
+        getCompositeDisposable().add(getDataManager()
                 .insertPlayer(playerByNickDB)
                 .subscribeOn(getSchedulerProvider().io())
                 .observeOn(getSchedulerProvider().ui())
@@ -61,8 +64,7 @@ public class PlayerViewModel extends BaseViewModel<NavigatorPlayer> {
                 }, throwable -> {
                     LogUtil.log(throwable.getMessage()+"@#!#!");
                 }));
-*/
-        getCompositeDisposable().add(getDataManager()
+       /* getCompositeDisposable().add(getDataManager()
                 .getAllPlayers()
                 .subscribeOn(getSchedulerProvider().io())
                 .observeOn(getSchedulerProvider().ui())
@@ -70,6 +72,6 @@ public class PlayerViewModel extends BaseViewModel<NavigatorPlayer> {
                     LogUtil.log(responsePlayer.get(2).nickName+"@!#!@#");
                 }, throwable -> {
                     LogUtil.log(throwable.getMessage()+"@#!#!");
-                }));
+                }));*/
     }
 }

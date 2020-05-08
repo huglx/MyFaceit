@@ -8,7 +8,7 @@ import com.isteel.myfaceit.data.model.ResponsePlayer;
 import com.isteel.myfaceit.data.model.db.PlayerByNickDB;
 
 
-@Database(entities = {PlayerByNickDB.class}, version = 5)
+@Database(entities = {PlayerByNickDB.class}, version = 7)
 public abstract class AppDatabase extends RoomDatabase {
 
     public abstract ProfileByNickDBDao playerByNickDBDao();

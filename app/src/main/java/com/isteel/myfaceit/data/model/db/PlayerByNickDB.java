@@ -21,6 +21,12 @@ public class PlayerByNickDB {
     @ColumnInfo(name = "Nickname")
     public String nickName;
 
+    @ColumnInfo(name = "playerId")
+    public String playerId;
+
+    @ColumnInfo(name = "avatar")
+    public String avatar;
+
     @Expose
     @SerializedName("updated_at")
     @ColumnInfo(name = "updated_at")
