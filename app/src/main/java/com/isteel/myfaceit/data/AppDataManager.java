@@ -85,14 +85,14 @@ public class AppDataManager implements DataManager{
     }
 
     @Override
-    public List<ResponsePlayer.PlayerByNick> getProfile() {
-        return mPreferencesHelper.getProfile();
-    }
-    @Override
-    public void setProfile(ResponsePlayer.PlayerByNick profile) {
-        mPreferencesHelper.setProfile(profile);
+    public Integer getRegion() {
+        return mPreferencesHelper.getRegion();
     }
 
+    @Override
+    public void setRegion(Integer region) {
+        mPreferencesHelper.setRegion(region);
+    }
     @Override
     public Observable<List<PlayerByNickDB>> getAllPlayers() {
         return mDbHelper.getAllPlayers();
@@ -101,5 +101,10 @@ public class AppDataManager implements DataManager{
     @Override
     public Observable<Boolean> insertPlayer(PlayerByNickDB playerByNickDB) {
         return mDbHelper.insertPlayer(playerByNickDB);
+    }
+
+    @Override
+    public Observable<Boolean> deletePlayer(PlayerByNickDB playerByNickDB) {
+        return mDbHelper.deletePlayer(playerByNickDB);
     }
 }

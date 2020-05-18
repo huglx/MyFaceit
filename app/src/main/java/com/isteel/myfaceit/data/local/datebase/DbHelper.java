@@ -11,4 +11,6 @@ public interface DbHelper {
 
     Observable<Boolean> insertPlayer(PlayerByNickDB playerByNickDB);
 
+    Observable<Boolean> deletePlayer(PlayerByNickDB playerByNickDB);
+
 }

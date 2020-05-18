@@ -17,21 +17,18 @@ public class LeaderBoardsViewModel extends BaseViewModel<LeaderNavigator> {
     public LeaderBoardsViewModel(DataManager dataManager, SchedulerProvider schedulerProvider) {
         super(dataManager, schedulerProvider);
         playerListLiveData = new MutableLiveData<>();
-        fetchData("", "EU");
     }
 
     public void fetchData(String game,String region) {
         setIsLoading(true);
-        getDataManager().setGame("csgo");
         getCompositeDisposable().add(getDataManager()
-                .getTop("csgo", "EU")
+                .getTop("csgo",region)
                 .subscribeOn(getSchedulerProvider().io())
                 .observeOn(getSchedulerProvider().ui())
                 .subscribe(responsePlayer -> {
                     if (responsePlayer != null && responsePlayer.getItems() != null) {
                         playerListLiveData.setValue(responsePlayer.getItems());
                         setIsLoading(false);
-
                     }
                 }, throwable -> {
                     LogUtil.log(throwable.getMessage());
@@ -42,5 +39,13 @@ public class LeaderBoardsViewModel extends BaseViewModel<LeaderNavigator> {
 
     public MutableLiveData<List<ResponsePlayer.PlayerByNick>> getPlayerListLiveData() {
         return playerListLiveData;
+    }
+
+    public Integer getRegion(){
+        return getDataManager().getRegion();
+    }
+
+    public void setRegion(Integer region){
+        getDataManager().setRegion(region);
     }
 }

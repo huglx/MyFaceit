@@ -17,6 +17,7 @@
 package com.isteel.myfaceit.data.local.datebase.dao;
 
 import androidx.room.Dao;
+import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
@@ -39,4 +40,7 @@ public interface ProfileByNickDBDao {
 
     @Query("SELECT * FROM playerByNickList")
     Single<List<PlayerByNickDB>> loadAll();
+
+    @Delete
+    void deleteItem(PlayerByNickDB playerByNickDB);
 }

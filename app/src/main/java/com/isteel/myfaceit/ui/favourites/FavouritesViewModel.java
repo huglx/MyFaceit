@@ -19,7 +19,6 @@ public class FavouritesViewModel extends BaseViewModel<FavouritesNavigator> {
 
         playerListLiveData = new MutableLiveData<>();
         fetchData();
-
     }
 
     public void fetchData() {
@@ -30,6 +29,18 @@ public class FavouritesViewModel extends BaseViewModel<FavouritesNavigator> {
                 .subscribe(responsePlayer -> {
                     playerListLiveData.setValue(responsePlayer);
                  //   getNavigator().updatePlayers(responsePlayer);
+                }, throwable -> {
+                    LogUtil.log(throwable.getMessage()+"@#!#!");
+                }));
+    }
+
+    public void deletePlayerFromDB(int pos){
+        getCompositeDisposable().add(getDataManager()
+                .deletePlayer(playerListLiveData.getValue().get(pos))
+                .subscribeOn(getSchedulerProvider().io())
+                .observeOn(getSchedulerProvider().ui())
+                .subscribe(responsePlayer -> {
+                    fetchData();
                 }, throwable -> {
                     LogUtil.log(throwable.getMessage()+"@#!#!");
                 }));

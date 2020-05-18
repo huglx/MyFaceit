@@ -35,8 +35,11 @@ public class SwipeController extends ItemTouchHelper.Callback {
 
         private static final float buttonWidth = 300;
 
-        public SwipeController(SwipeControllerActions buttonsActions) {
+        private int buttonType; //0 - delete - 1 add to fav(star)
+
+        public SwipeController(SwipeControllerActions buttonsActions,int buttonType) {
             this.buttonsActions = buttonsActions;
+            this.buttonType = buttonType;
         }
 
         @Override
@@ -146,9 +149,15 @@ public class SwipeController extends ItemTouchHelper.Callback {
             Paint p = new Paint();
 
             RectF rightButton = new RectF(itemView.getRight() - buttonWidthWithoutPadding, itemView.getTop(), itemView.getRight(), itemView.getBottom());
-            p.setColor(Color.parseColor("#F2C94C"));
-            c.drawRoundRect(rightButton, corners, corners, p);
-            drawText("STAR", c, rightButton, p);
+            if(buttonType == 1) {
+                p.setColor(Color.parseColor("#F2C94C"));
+                c.drawRoundRect(rightButton, corners, corners, p);
+                drawText("STAR", c, rightButton, p);
+            }else{
+                p.setColor(Color.parseColor("#d11a2a"));
+                c.drawRoundRect(rightButton, corners, corners, p);
+                drawText("DELETE", c, rightButton, p);
+            }
 
             buttonInstance = null;
             if (buttonShowedState == ButtonsState.RIGHT_VISIBLE) {
@@ -171,4 +180,6 @@ public class SwipeController extends ItemTouchHelper.Callback {
                 drawButtons(c, currentItemViewHolder);
             }
         }
+
+
 }

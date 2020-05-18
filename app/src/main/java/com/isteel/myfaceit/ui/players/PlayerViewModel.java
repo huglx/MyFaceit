@@ -20,7 +20,6 @@ public class PlayerViewModel extends BaseViewModel<NavigatorPlayer> {
     public PlayerViewModel(DataManager dataManager, SchedulerProvider schedulerProvider) {
         super(dataManager, schedulerProvider);
         playerListLiveData = new MutableLiveData<>();
-        fetchData("skyline4132");
     }
 
     public void fetchData(String querry) {
@@ -46,7 +45,7 @@ public class PlayerViewModel extends BaseViewModel<NavigatorPlayer> {
     }
 
 
-    public void setPlayerByPos(int pos){
+    public void addPlayerToDB(int pos){
         PlayerByNickDB playerByNickDB = new PlayerByNickDB();
         playerByNickDB.nickName = playerListLiveData.getValue().get(pos).getNickName();
         playerByNickDB.playerId = playerListLiveData.getValue().get(pos).getPlayer_id();
@@ -64,14 +63,5 @@ public class PlayerViewModel extends BaseViewModel<NavigatorPlayer> {
                 }, throwable -> {
                     LogUtil.log(throwable.getMessage()+"@#!#!");
                 }));
-       /* getCompositeDisposable().add(getDataManager()
-                .getAllPlayers()
-                .subscribeOn(getSchedulerProvider().io())
-                .observeOn(getSchedulerProvider().ui())
-                .subscribe(responsePlayer -> {
-                    LogUtil.log(responsePlayer.get(2).nickName+"@!#!@#");
-                }, throwable -> {
-                    LogUtil.log(throwable.getMessage()+"@#!#!");
-                }));*/
     }
 }

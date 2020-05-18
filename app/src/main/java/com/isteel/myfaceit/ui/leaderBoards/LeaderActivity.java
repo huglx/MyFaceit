@@ -3,13 +3,11 @@ package com.isteel.myfaceit.ui.leaderBoards;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.inputmethod.EditorInfo;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
@@ -22,9 +20,9 @@ import com.isteel.myfaceit.ui.base.BaseActivity;
 import com.isteel.myfaceit.ui.favourites.FavouritesActivity;
 import com.isteel.myfaceit.ui.players.PlayerActivity;
 import com.isteel.myfaceit.utils.BottomNavigationViewHelper;
-import com.isteel.myfaceit.utils.LogUtil;
 
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import javax.inject.Inject;
 
@@ -76,7 +74,29 @@ public class LeaderActivity extends BaseActivity<ActivityLeaderBinding, LeaderBo
         mainBinding.recyclerView.setLayoutManager(mLinearLayout);
         mainBinding.recyclerView.setAdapter(mLeaderAdapter);
 
+        mainBinding.regionPicker.setOnClickListener(v -> {
+        setPicker();
+        });
         settingBottomNav();
+    }
+
+    private void setPicker() {
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Select Region");
+        builder.setSingleChoiceItems(R.array.select_items, leaderBoardsViewModel.getRegion(), (dialog, which) -> {
+            switch (which) {
+                case 0:
+                    leaderBoardsViewModel.setRegion(0);
+                    leaderBoardsViewModel.fetchData("csgo", "EU");
+                    break;
+                case 1:
+                    leaderBoardsViewModel.setRegion(1);
+                    leaderBoardsViewModel.fetchData("csgo", "US");
+                    break;
+            }
+        });
+        builder.show();
     }
 
     private void settingBottomNav() {
@@ -84,14 +104,6 @@ public class LeaderActivity extends BaseActivity<ActivityLeaderBinding, LeaderBo
         Menu menu = mainBinding.bottomNavigation.getMenu();
         MenuItem menuItem = menu.getItem(1);
         menuItem.setChecked(true);
-
-        mainBinding.search.setOnEditorActionListener((v, actionId, event) -> {
-            if ((event != null && (event.getKeyCode() == KeyEvent.KEYCODE_ENTER)) || (actionId == EditorInfo.IME_ACTION_DONE)) {
-                leaderBoardsViewModel.fetchData("csgo", "EU");
-
-            }
-            return false;
-        });
 
         mainBinding.bottomNavigation.setOnNavigationItemSelectedListener(item ->{
             switch (item.getItemId()) {

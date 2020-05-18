@@ -49,12 +49,17 @@ public class AppDbHelper implements DbHelper {
 
     @Override
     public Observable<Boolean> insertPlayer(PlayerByNickDB playerByNickDB) {
-        return Observable.fromCallable(new Callable<Boolean>() {
-            @Override
-            public Boolean call() throws Exception {
-                mAppDatabase.playerByNickDBDao().insert(playerByNickDB);
-                return true;
-            }
+        return Observable.fromCallable(() -> {
+            mAppDatabase.playerByNickDBDao().insert(playerByNickDB);
+            return true;
+        });
+    }
+
+    @Override
+    public Observable<Boolean> deletePlayer(PlayerByNickDB playerByNickDB) {
+        return Observable.fromCallable(() -> {
+            mAppDatabase.playerByNickDBDao().deleteItem(playerByNickDB);
+            return true;
         });
     }
 }

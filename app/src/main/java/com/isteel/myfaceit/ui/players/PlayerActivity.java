@@ -87,22 +87,25 @@ public class PlayerActivity extends BaseActivity<ActivityPlayerBinding, PlayerVi
         if (getSupportActionBar() != null) {
             mainBinding.toolbar.setTitle("Search For Players");
         }
+
+        mainBinding.recyclerView.setLayoutManager(mLinearLayout);
+        mainBinding.recyclerView.setAdapter(mPlayerAdapter);
+
         settingBottomNav();
         settingSwipeController();
+
     }
 
     private void settingSwipeController() {
         swipeController = new SwipeController(new SwipeControllerActions() {
             @Override
             public void onRightClicked(int position) {
-                playerViewModel.setPlayerByPos(position);
+                playerViewModel.addPlayerToDB(position);
             }
-        });
+        }, 1);
 
         ItemTouchHelper itemTouchhelper = new ItemTouchHelper(swipeController);
         itemTouchhelper.attachToRecyclerView(mainBinding.recyclerView);
-        mainBinding.recyclerView.setLayoutManager(mLinearLayout);
-        mainBinding.recyclerView.setAdapter(mPlayerAdapter);
 
         mainBinding.recyclerView.addItemDecoration(new RecyclerView.ItemDecoration() {
             @Override
@@ -121,7 +124,6 @@ public class PlayerActivity extends BaseActivity<ActivityPlayerBinding, PlayerVi
         mainBinding.search.setOnEditorActionListener((v, actionId, event) -> {
             if ((event != null && (event.getKeyCode() == KeyEvent.KEYCODE_ENTER)) || (actionId == EditorInfo.IME_ACTION_DONE)) {
                 playerViewModel.fetchData(mainBinding.search.getText().toString());
-
             }
             return false;
         });
@@ -139,15 +141,12 @@ public class PlayerActivity extends BaseActivity<ActivityPlayerBinding, PlayerVi
                     startActivity(FavouritesActivity.newIntent(this));
                     overridePendingTransition(0, 0);
                     this.finish();
-
-
                     break;
                 case R.id.LeaderBoardsFragment:
                     //   fragment = LeaderBoardsFragment.newInstance();
                     startActivity(LeaderActivity.newIntent(this));
                     overridePendingTransition(0, 0);
                     this.finish();
-
                     break;
             }
             return true;

@@ -61,7 +61,6 @@ public final class BindingUtils {
     @BindingAdapter({"android:favourites"})
     public static void addProfileItems(RecyclerView recyclerView, List<PlayerByNickDB> playerByNicks) {
         FavouritesAdapter adapter = (FavouritesAdapter) recyclerView.getAdapter();
-
         if (adapter != null) {
             adapter.clearItems();
             adapter.addItems(playerByNicks);

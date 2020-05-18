@@ -18,6 +18,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
             <ImageView
+                imageUrl="@{viewModel.avatar}"
                 android:layout_marginLeft="8dp"
                 android:id="@+id/avatar"
                 android:layout_alignParentStart="true"
@@ -32,16 +33,6 @@
                 android:textAppearance="@style/Head5TextStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_toRightOf="@id/avatar"
-                />
-            <TextView
-                android:layout_marginLeft="8dp"
-                android:id="@+id/level"
-                android:text="@{}"
-                android:textAppearance="@style/BodyTextStyle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/label"
                 android:layout_toRightOf="@id/avatar"
                 />
         </RelativeLayout>

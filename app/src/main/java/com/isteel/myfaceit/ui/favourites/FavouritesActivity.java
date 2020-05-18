@@ -2,10 +2,13 @@ package com.isteel.myfaceit.ui.favourites;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Canvas;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -19,6 +22,8 @@ import com.isteel.myfaceit.ui.base.BaseActivity;
 import com.isteel.myfaceit.ui.leaderBoards.LeaderActivity;
 import com.isteel.myfaceit.ui.players.PlayerActivity;
 import com.isteel.myfaceit.utils.BottomNavigationViewHelper;
+import com.isteel.myfaceit.utils.SwipeController;
+import com.isteel.myfaceit.utils.SwipeControllerActions;
 
 import java.util.List;
 
@@ -36,6 +41,8 @@ FavouritesAdapter.GameAdapterListener, FavouritesNavigator {
     FavouritesAdapter mGameAdapter;
     @Inject
     LinearLayoutManager mLinearLayout;
+
+    private SwipeController swipeController;
 
     @Override
     public int getBindingVariable() {
@@ -90,6 +97,27 @@ FavouritesAdapter.GameAdapterListener, FavouritesNavigator {
         mainBinding.recyclerView.setLayoutManager(mLinearLayout);
         mainBinding.recyclerView.setAdapter(mGameAdapter);
         settingBottomNav();
+
+        settingSwipeController();
+    }
+
+    private void settingSwipeController() {
+        swipeController = new SwipeController(new SwipeControllerActions() {
+            @Override
+            public void onRightClicked(int position) {
+                mainViewModel.deletePlayerFromDB(position);
+            }
+        }, 0);
+
+        ItemTouchHelper itemTouchhelper = new ItemTouchHelper(swipeController);
+        itemTouchhelper.attachToRecyclerView(mainBinding.recyclerView);
+
+        mainBinding.recyclerView.addItemDecoration(new RecyclerView.ItemDecoration() {
+            @Override
+            public void onDraw(Canvas c, RecyclerView parent, RecyclerView.State state) {
+                swipeController.onDraw(c);
+            }
+        });
     }
 
     private void settingBottomNav() {

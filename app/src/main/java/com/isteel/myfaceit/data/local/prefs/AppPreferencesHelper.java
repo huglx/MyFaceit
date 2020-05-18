@@ -31,15 +31,13 @@ import javax.inject.Inject;
 public class AppPreferencesHelper implements PreferencesHelper {
 
     private static final String PREF_GAME = "PREF_GAME";
-    private static final String PREF_PROFILE = "PREF_PROFILE";
-    private List<ResponsePlayer.PlayerByNick> playerByNickList;
+    private static final String PREF_REGION = "PREF_REGION";
 
     private final SharedPreferences mPrefs;
 
     @Inject
     public AppPreferencesHelper(Context context, @PreferenceInfo String prefFileName) {
         mPrefs = context.getSharedPreferences(prefFileName, Context.MODE_PRIVATE);
-        playerByNickList = new ArrayList<>();
     }
 
     @Override
@@ -53,13 +51,13 @@ public class AppPreferencesHelper implements PreferencesHelper {
     }
 
     @Override
-    public List<ResponsePlayer.PlayerByNick> getProfile() {
-        return playerByNickList;
+    public Integer getRegion() {
+        return mPrefs.getInt(PREF_REGION, 0);
     }
 
     @Override
-    public void setProfile(ResponsePlayer.PlayerByNick profile) {
-        if(profile!=null)
-        playerByNickList.add(profile);
+    public void setRegion(Integer region) {
+        mPrefs.edit().putInt(PREF_REGION, region).apply();
     }
+
 }

@@ -26,6 +26,6 @@ public interface PreferencesHelper {
     String getGame();
     void setGame(String game);
 
-    List<ResponsePlayer.PlayerByNick> getProfile();
-    void setProfile(ResponsePlayer.PlayerByNick profile);
+    Integer getRegion();
+    void setRegion(Integer region);
 }
