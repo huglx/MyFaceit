@@ -5,17 +5,19 @@ import androidx.lifecycle.ViewModelProvider;
 
 
 import com.isteel.myfaceit.data.DataManager;
-import com.isteel.myfaceit.ui.main.MainViewModel;
+import com.isteel.myfaceit.ui.favourites.FavouritesViewModel;
+import com.isteel.myfaceit.ui.leaderBoards.LeaderBoardsViewModel;
+import com.isteel.myfaceit.ui.players.profile.mapsStats.MapsViewModel;
+import com.isteel.myfaceit.ui.players.profile.profileInfo.ProfileInfoViewModel;
+import com.isteel.myfaceit.ui.players.profile.ProfileViewModel;
 import com.isteel.myfaceit.ui.players.PlayerViewModel;
+import com.isteel.myfaceit.ui.players.profile.recentMaps.recentMapsStats.RecentMapsStatsViewModel;
 import com.isteel.myfaceit.ui.teams.TeamsViewModel;
 import com.isteel.myfaceit.utils.rx.SchedulerProvider;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
-/**
- * Created by jyotidubey on 22/02/19.
- */
 @Singleton
 public class ViewModelProviderFactory extends ViewModelProvider.NewInstanceFactory {
 
@@ -32,12 +34,30 @@ public class ViewModelProviderFactory extends ViewModelProvider.NewInstanceFacto
 
   @Override
   public <T extends ViewModel> T create(Class<T> modelClass) {
-    if (modelClass.isAssignableFrom(MainViewModel.class)) {
+    if (modelClass.isAssignableFrom(ProfileViewModel.class)) {
       //noinspection unchecked
-      return (T) new MainViewModel(dataManager, schedulerProvider);
+      return (T) new ProfileViewModel(dataManager, schedulerProvider);
+    }else if (modelClass.isAssignableFrom(FavouritesViewModel.class)) {
+      //noinspection unchecked
+      return (T) new FavouritesViewModel(dataManager, schedulerProvider);
     }else if (modelClass.isAssignableFrom(PlayerViewModel.class)) {
       //noinspection unchecked
       return (T) new PlayerViewModel(dataManager, schedulerProvider);
+    } else if (modelClass.isAssignableFrom(LeaderBoardsViewModel.class)) {
+      //noinspection unchecked
+      return (T) new LeaderBoardsViewModel(dataManager, schedulerProvider);
+    }
+      else if (modelClass.isAssignableFrom(ProfileInfoViewModel.class)) {
+      //noinspection unchecked
+      return (T) new ProfileInfoViewModel(dataManager, schedulerProvider);
+    }
+        else if (modelClass.isAssignableFrom(MapsViewModel.class)) {
+      //noinspection unchecked
+      return (T) new MapsViewModel(dataManager, schedulerProvider);
+    }
+        else if (modelClass.isAssignableFrom(RecentMapsStatsViewModel.class)) {
+      //noinspection unchecked
+      return (T) new RecentMapsStatsViewModel(dataManager, schedulerProvider);
     }else if (modelClass.isAssignableFrom(TeamsViewModel.class)) {
       //noinspection unchecked
       return (T) new TeamsViewModel(dataManager, schedulerProvider);

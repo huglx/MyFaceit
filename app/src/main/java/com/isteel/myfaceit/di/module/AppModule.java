@@ -20,16 +20,32 @@ package com.isteel.myfaceit.di.module;
 import android.app.Application;
 import android.content.Context;
 
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.room.Room;
+
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.isteel.myfaceit.BuildConfig;
+import com.isteel.myfaceit.ViewModelProviderFactory;
 import com.isteel.myfaceit.data.AppDataManager;
 import com.isteel.myfaceit.data.DataManager;
+import com.isteel.myfaceit.data.local.datebase.AppDatabase;
+import com.isteel.myfaceit.data.local.datebase.AppDbHelper;
+import com.isteel.myfaceit.data.local.datebase.DbHelper;
+import com.isteel.myfaceit.data.local.prefs.AppPreferencesHelper;
+import com.isteel.myfaceit.data.local.prefs.PreferencesHelper;
 import com.isteel.myfaceit.data.remote.ApiHelper;
 import com.isteel.myfaceit.data.remote.ApiService;
 import com.isteel.myfaceit.di.ApiInfo;
+import com.isteel.myfaceit.di.DatabaseInfo;
+import com.isteel.myfaceit.di.PreferenceInfo;
+import com.isteel.myfaceit.ui.favourites.FavouritesAdapter;
+import com.isteel.myfaceit.ui.leaderBoards.LeaderAdapter;
+import com.isteel.myfaceit.ui.players.PlayerAdapter;
 import com.isteel.myfaceit.utils.rx.AppSchedulerProvider;
 import com.isteel.myfaceit.utils.rx.SchedulerProvider;
+
+import java.util.ArrayList;
 
 import javax.inject.Singleton;
 
@@ -56,6 +72,20 @@ public class AppModule {
         return application;
     }
 
+    @Provides
+    @Singleton
+    AppDatabase provideAppDatabase(@DatabaseInfo String dbName, Context context) {
+        return Room.databaseBuilder(context, AppDatabase.class, "db_faceit").fallbackToDestructiveMigration()
+                .build();
+    }
+
+    @Provides
+    ViewModelProviderFactory viewModelProviderFactory(DataManager dataManager,
+                                                      SchedulerProvider schedulerProvider) {
+        return new ViewModelProviderFactory(dataManager,
+                schedulerProvider);
+    }
+
 
     @Provides
     @Singleton
@@ -70,9 +100,51 @@ public class AppModule {
     }
 
     @Provides
+    @PreferenceInfo
+    String providePreferenceName() {
+        return "pref";
+    }
+
+    @Provides
+    @DatabaseInfo
+    String provideDatabaseName() {
+        return "db_my_faceit";
+    }
+
+    @Provides
+    @Singleton
+    DbHelper provideDbHelper(AppDbHelper appDbHelper) {
+        return appDbHelper;
+    }
+
+    @Provides
+    @Singleton
+    PreferencesHelper providePreferencesHelper(AppPreferencesHelper appPreferencesHelper) {
+        return appPreferencesHelper;
+    }
+
+    @Provides
     @Singleton
     ApiService provideApiHelper(ApiHelper appApiHelper) {
         return appApiHelper;
     }
+    @Provides
+    FavouritesAdapter provideGameAdapter() {
+        return new FavouritesAdapter(new ArrayList<>());
+    }
 
+    @Provides
+    PlayerAdapter providePlayerAdapter() {
+        return new PlayerAdapter(new ArrayList<>());
+    }
+
+    @Provides
+    LeaderAdapter provideLeaderAdapter() {
+        return new LeaderAdapter(new ArrayList<>());
+    }
+
+    @Provides
+    LinearLayoutManager provideLinearLayoutManager(Context context) {
+        return new LinearLayoutManager(context);
+    }
 }

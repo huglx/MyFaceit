@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    android:layout_gravity="center"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.isteel.myfaceit.ui.players.profile.profileInfo.ProfileInfoViewModel" />
+
+    </data>
+
+        <RelativeLayout
+            android:background="@color/colorAccent"
+        android:layout_width="match_parent"
+        android:layout_height="190dp">
+
+            <TextView
+                android:layout_margin="5dp"
+                android:id="@+id/elo"
+                android:textColor="@color/colorPrimary"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:nick="@{viewModel.isLoading ? viewModel.str() : viewModel.getElo()}"
+                />
+            <TextView
+                android:textColor="@color/colorPrimary"
+                android:layout_margin="5dp"
+                android:id="@+id/maps"
+                android:layout_below="@id/elo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:nick="@{viewModel.str()}"
+                />
+            <TextView
+                android:layout_margin="5dp"
+                android:id="@+id/kd"
+                android:layout_below="@id/maps"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{viewModel.str()}"
+                />
+            <TextView
+                android:layout_margin="5dp"
+                android:id="@+id/winrate"
+                android:layout_toEndOf="@id/elo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{viewModel.str()}"
+                />
+        </RelativeLayout>
+</layout>

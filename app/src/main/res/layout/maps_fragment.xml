@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:shimmer="http://schemas.android.com/tools"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="viewModel"
+            type="com.isteel.myfaceit.ui.players.profile.mapsStats.MapsViewModel"/>
+    </data>
+    <FrameLayout
+        android:background="@color/colorAccentDarker"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <androidx.recyclerview.widget.RecyclerView
+            android:visibility="@{viewModel.isRecentMatches ? View.GONE : View.VISIBLE}"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/recyclerViewAllMatches"
+            android:maps="@{viewModel.isRecentMatches ? null : viewModel.mapsList }"
+            tools:listitem="@layout/map_item"
+            />
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:recent_maps="@{viewModel.isRecentMatches ? viewModel.matchList : viewModel.matchList }"
+            android:id="@+id/recyclerViewRecentMatches"
+            tools:listitem="@layout/map_item"
+            />
+
+    </FrameLayout>
+</layout>

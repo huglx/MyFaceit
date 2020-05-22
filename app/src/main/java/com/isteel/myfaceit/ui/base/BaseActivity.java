@@ -34,11 +34,6 @@ import androidx.databinding.ViewDataBinding;
 import com.isteel.myfaceit.utils.NetworkUtils;
 
 import dagger.android.AndroidInjection;
-import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
-
-/**
- * Created by amitshekhar on 07/07/17.
- */
 
 public abstract class BaseActivity<T extends ViewDataBinding, V extends BaseViewModel> extends AppCompatActivity
         implements BaseFragment.Callback {
@@ -79,11 +74,6 @@ public abstract class BaseActivity<T extends ViewDataBinding, V extends BaseView
     @Override
     public void onFragmentDetached(String tag) {
 
-    }
-
-    @Override
-    protected void attachBaseContext(Context newBase) {
-        super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
     }
 
     @Override
@@ -135,12 +125,14 @@ public abstract class BaseActivity<T extends ViewDataBinding, V extends BaseView
 
     public void showLoading() {
         hideLoading();
+
     }
 
     private void performDataBinding() {
         mViewDataBinding = DataBindingUtil.setContentView(this, getLayoutId());
         this.mViewModel = mViewModel == null ? getViewModel() : mViewModel;
         mViewDataBinding.setVariable(getBindingVariable(), mViewModel);
+        mViewDataBinding.setLifecycleOwner(this);
         mViewDataBinding.executePendingBindings();
     }
 }

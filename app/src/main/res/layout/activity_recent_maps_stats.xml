@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".ui.players.profile.recentMaps.recentMapsStats.RecentMapsStatsActivity">
+
+    <data>
+        <import type="android.view.View" />
+        <variable
+            name="viewModel"
+            type="com.isteel.myfaceit.ui.players.profile.recentMaps.recentMapsStats.RecentMapsStatsViewModel" />
+    </data>
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <TextView
+            android:text="@{viewModel.isLoading ? viewModel.getScore() : viewModel.getScore()}"
+            android:layout_width="match_parent"
+            android:textAlignment="center"
+            style="@style/TitleTextStyle"
+            android:layout_height="wrap_content"/>
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_marginTop="30dp"
+        android:layout_width="200dp"
+        android:id="@+id/first_team"
+        android:layout_gravity="start"
+        android:layout_height="wrap_content"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_marginTop="30dp"
+
+            android:layout_width="200dp"
+            android:id="@+id/second_team"
+            android:layout_gravity="end"
+            android:layout_height="wrap_content"/>
+    </FrameLayout>
+</layout>

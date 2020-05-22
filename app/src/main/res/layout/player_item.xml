@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.isteel.myfaceit.ui.players.PlayerItemViewModel" />
+
+    </data>
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_margin="10dp"
+        app:cardCornerRadius="6dp"
+        android:layout_width="match_parent"
+        android:layout_height="90dp">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <ImageView
+                android:layout_marginTop="8dp"
+                android:layout_marginLeft="8dp"
+                android:id="@+id/avatar"
+                android:layout_alignParentStart="true"
+                android:layout_width="64dp"
+                android:layout_height="64dp"
+                app:imageUrl="@{viewModel.avatar}"
+                android:src="@drawable/ic_launcher_foreground"
+                />
+            <TextView
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="8dp"
+                android:id="@+id/label"
+                android:text="@{viewModel.nickname}"
+                android:textAppearance="@style/Head5TextStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@id/avatar"
+                />
+            <TextView
+                android:layout_marginLeft="8dp"
+                android:id="@+id/game"
+                android:textAppearance="@style/BodyTextStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/label"
+                android:layout_toRightOf="@id/avatar"
+                />
+            <TextView
+                android:layout_marginLeft="8dp"
+                android:id="@+id/level"
+                android:textAppearance="@style/BodyTextStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/label"
+                android:layout_toEndOf="@id/game"
+                android:layout_toRightOf="@id/avatar"
+                />
+        </RelativeLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+</layout>

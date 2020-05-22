@@ -5,6 +5,6 @@ import android.util.Log;
 
 public class LogUtil {
     public static void log(String s){
-        Log.i("DEBUGINFO", s);
+        Log.i("DEBUGINFO", s+"213");
     }
 }

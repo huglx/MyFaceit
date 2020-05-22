@@ -17,9 +17,14 @@
 package com.isteel.myfaceit.di.builder;
 
 
-import com.isteel.myfaceit.ui.main.MainActivity;
-import com.isteel.myfaceit.ui.players.PlayerFragmentProvider;
-import com.isteel.myfaceit.ui.teams.TeamsFragmentProvider;
+import com.isteel.myfaceit.ui.favourites.FavouritesActivity;
+import com.isteel.myfaceit.ui.leaderBoards.LeaderActivity;
+import com.isteel.myfaceit.ui.players.profile.mapsStats.MapsFragmentProvider;
+import com.isteel.myfaceit.ui.players.profile.profileInfo.ProfileInfoFragmentProvider;
+import com.isteel.myfaceit.ui.players.profile.ProfileActivity;
+import com.isteel.myfaceit.ui.players.PlayerActivity;
+import com.isteel.myfaceit.ui.players.profile.ProfileActivityModule;
+import com.isteel.myfaceit.ui.players.profile.recentMaps.recentMapsStats.RecentMapsStatsActivity;
 
 import dagger.Module;
 import dagger.android.ContributesAndroidInjector;
@@ -28,7 +33,22 @@ import dagger.android.ContributesAndroidInjector;
 public abstract class ActivityBuilder {
 
     @ContributesAndroidInjector(modules ={
-            PlayerFragmentProvider.class,
-            TeamsFragmentProvider.class})
-    abstract MainActivity bindMainActivity();
+            ProfileInfoFragmentProvider.class,
+            MapsFragmentProvider.class,
+            ProfileActivityModule.class})
+    abstract ProfileActivity bindMainActivity();
+
+    @ContributesAndroidInjector
+    abstract FavouritesActivity bindGameActivity();
+
+    @ContributesAndroidInjector
+    abstract RecentMapsStatsActivity bindRecentMapsStatsActivity();
+
+    @ContributesAndroidInjector
+    abstract LeaderActivity bindLeaderActivity();
+
+    @ContributesAndroidInjector
+    abstract PlayerActivity bindPlayerActivity();
+
+
 }
